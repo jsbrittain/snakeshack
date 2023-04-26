@@ -1,0 +1,107 @@
+configfile: "config.yaml"
+
+
+include: "rules/common.smk"
+
+
+rule get_remote_file:
+    output:
+        expand(
+            "results/{outdir}{filename}",
+            outdir=config["outdir"],
+            filename=get_address_filename(),
+        ),
+    params:
+        outdir=config["outdir"],
+        filename=get_address_filename(),
+        address=config["address"],
+    log:
+        "logs/{params.outdir}{params.filename}.log",
+    benchmark:
+        "benchmarks/{params.outdir}{params.filename}.txt"
+    conda:
+        "conda.yaml"
+    shell:
+        "wget {params.address} -O {output}"
+
+
+rule rename:
+    output:
+        expand(
+            "results/{outdir}{infile}",
+            outdir=config["outdir"],
+            infile=config["infile"],
+        ),
+    input:
+        expand(
+            "results/{outdir}{basename}{ext}",
+            outdir=config["outdir"],
+            basename=strip_address_ext(),
+            ext=get_address_ext(),
+        ),
+    params:
+        outdir=config["outdir"],
+        infile=config["infile"],
+    log:
+        "logs/{params.outdir}{params.infile}.log",
+    benchmark:
+        "benchmarks/{params.outdir}{params.infile}.txt"
+    conda:
+        "conda.yaml"
+    shell:
+        "mv {input} {output}"
+
+
+rule gunzip:
+    output:
+        expand(
+            "results/{outdir}{unzipped}",
+            outdir=config["outdir"],
+            unzipped=strip_address_ext(),
+        ),
+    input:
+        expand(
+            "results/{outdir}{unzipped}.gz",
+            outdir=config["outdir"],
+            unzipped=strip_address_ext(),
+        ),
+    params:
+        outdir=config["outdir"],
+        unzipped=strip_address_ext(),
+    log:
+        "logs/{params.outdir}{params.unzipped}.log",
+    benchmark:
+        "benchmarks/{params.outdir}{params.unzipped}.txt"
+    conda:
+        "conda.yaml"
+    shell:
+        "gunzip {input}"
+
+
+rule untar:
+    output:
+        expand(
+            "results/{outdir}{infile}",
+            outdir=config["outdir"],
+            infile=config["infile"],
+        ),
+    input:
+        expand(
+            "results/{outdir}{untarred}.tar",
+            outdir=config["outdir"],
+            untarred=strip_infile_ext(),
+        ),
+    params:
+        outdir=config["outdir"],
+        infile=config["infile"],
+    log:
+        "logs/{params.outdir}{params.infile}.log",
+    benchmark:
+        "benchmarks/{params.outdir}{params.infile}.txt"
+    conda:
+        "conda.yaml"
+    shell:
+        "tar xvf {input} --directory results/{params.outdir} && rm {input}"
+
+
+ruleorder: gunzip > rename > untar
