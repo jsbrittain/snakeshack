@@ -1,7 +1,7 @@
 # snakeshack
 
-Repository of snakemake workflows for version controlled modular pipeline
-construction.
+** This is a work-in-progress repository of Snakemake workflows as basis for
+a version controlled system of modular pipeline construction.**
 
 The `workflows` folder contains labs or workflows that are contributing
 Snakemake modules. Each modules should be a Snakemake workflow that
