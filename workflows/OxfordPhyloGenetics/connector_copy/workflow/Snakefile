@@ -23,4 +23,4 @@ rule copy:
     conda:
         "envs/conda.yaml"
     shell:
-        "cp -r * {input} {output}"
+        "cp -r {input} {output}"
