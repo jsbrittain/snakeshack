@@ -3,23 +3,22 @@ configfile: "config/config.yaml"
 rule sleep:
     input:
         expand(
-            "results/{indir}{filename}",
+            "results/{indir}/{infile}",
             indir=config["input_namespace"],
-            filename=config["input_filename"],
+            infile=config["input_filename"],
         ),
     output:
         expand(
-            "results/{outdir}{filename}",
+            "results/{outdir}/{outfile}",
             outdir=config["output_namespace"],
-            filename=config["output_filename"],
+            outfile=config["output_filename"],
         ),
     params:
         outdir=config["output_namespace"],
-        filename=config["output_filename"],
     log:
-        "logs/{params.outdir}{params.filename}.log",
+        "logs/{params.outdir}.log",
     benchmark:
-        "benchmarks/{params.outdir}{params.filename}.txt"
+        "benchmarks/{params.outdir}.txt"
     conda:
         "conda.yaml"
     shell:
