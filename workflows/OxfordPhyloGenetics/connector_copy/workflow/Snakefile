@@ -21,6 +21,6 @@ rule copy:
     benchmark:
         "benchmarks/{params.indir}-connector_copy.txt"
     conda:
-        "conda.yaml"
+        "envs/conda.yaml"
     shell:
         "cp -r * {input} {output}"
