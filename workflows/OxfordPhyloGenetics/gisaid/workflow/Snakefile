@@ -1,6 +1,6 @@
 configfile: "config/config.yaml"
 
-rule {{template}}:
+rule gisaid:
     input:
         expand(
             "results/{indir}/{infile}",
@@ -19,8 +19,8 @@ rule {{template}}:
             outdir=config["output_namespace"],
         )
     benchmark:
-        "benchmarks/{{template}}.txt"
+        "benchmarks/gisaid.txt"
     conda:
-        "envs/conda.yaml"
+        "envs/gisaid.yaml"
     shell:
-        "touch {output}"
+        "workflow/scripts/gisaid_preprocess/process_gisaid_metadata.R {input} --outfile {output}"
