@@ -11,3 +11,5 @@ rule start:
         "logs/{params.outdir}.log",
     benchmark:
         "benchmarks/{params.outdir}.txt"
+    shell:
+        "touch {output}"
