@@ -1,6 +1,6 @@
 configfile: "config/config.yaml"
 
-rule start:
+rule init:
     output:
         expand(
             "results/{outdir}/{outfile}",
@@ -8,8 +8,10 @@ rule start:
             outfile=config["output_filename"],
         ),
     log:
-        "logs/{params.outdir}.log",
+        "logs/start.log",
     benchmark:
-        "benchmarks/{params.outdir}.txt"
+        "benchmarks/start.txt"
+    conda:
+        "envs/conda.yaml"
     shell:
         "touch {output}"

@@ -1,6 +1,6 @@
 configfile: "config/config.yaml"
 
-rule sleep:
+rule {{template}}:
     input:
         expand(
             "results/{indir}/{infile}",
@@ -19,8 +19,8 @@ rule sleep:
             outdir=config["output_namespace"],
         )
     benchmark:
-        "benchmarks/sleep.txt"
+        "benchmarks/{{template}}.txt"
     conda:
         "envs/conda.yaml"
     shell:
-        "sleep 1 && touch {output}"
+        "touch {output}"
