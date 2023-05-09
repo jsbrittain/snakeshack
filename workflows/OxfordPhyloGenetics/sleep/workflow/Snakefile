@@ -13,6 +13,8 @@ rule sleep:
             outdir=config["output_namespace"],
             outfile=config["output_filename"],
         ),
+    params:
+        sleeptime=config["sleeptime"],
     log:
         expand(
             "logs/{outdir}.log",
@@ -23,4 +25,4 @@ rule sleep:
     conda:
         "envs/conda.yaml"
     shell:
-        "sleep 1 && touch {output}"
+        "sleep {params.sleeptime} && echo {params.sleeptime} > {output}"
