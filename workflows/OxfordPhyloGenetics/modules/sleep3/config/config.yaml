@@ -1,0 +1,21 @@
+oxfordphylogenetics/sleep1 :
+  input_namespace : "oxfordphylogenetics/sleep1_in"
+  input_filename : "mark"
+  output_namespace : "oxfordphylogenetics/sleep1_out"
+  output_filename : "mark"
+  sleeptime : "1"
+
+oxfordphylogenetics/sleep2 :
+  input_namespace : "oxfordphylogenetics/sleep2_in"
+  input_filename : "mark"
+  output_namespace : "oxfordphylogenetics/sleep2_out"
+  output_filename : "mark"
+  sleeptime : "1"
+
+oxfordphylogenetics/sleep3 :
+  input_namespace : "oxfordphylogenetics/sleep3_in"
+  input_filename : "mark"
+  output_namespace : "oxfordphylogenetics/sleep3_out"
+  output_filename : "mark"
+  sleeptime : "1"
+
