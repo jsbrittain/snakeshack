@@ -1,9 +1,6 @@
 configfile: "config/config.yaml"
 
-if 'phyloflow' not in config:
-    include: "header"
-
-rule sleep:
+rule copy:
     input:
         expand(
             "results/{indir}/{infile}",
@@ -16,16 +13,14 @@ rule sleep:
             outdir=config["output_namespace"],
             outfile=config["output_filename"],
         ),
-    params:
-        sleeptime=config["sleeptime"],
     log:
         expand(
-            "logs/{outdir}.log",
+            "logs/{outdir}-connector_copy.log",
             outdir=config["output_namespace"],
         )
     benchmark:
-        "benchmarks/sleep.txt"
+        "benchmarks/copy.txt"
     conda:
         "envs/conda.yaml"
     shell:
-        "sleep {params.sleeptime} && echo {params.sleeptime} > {output}"
+        "cp -r {input} {output}"

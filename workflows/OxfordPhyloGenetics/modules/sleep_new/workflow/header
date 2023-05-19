@@ -1,3 +1,4 @@
+config["phyloflow"] = {'version', 0.1}
 config["input_namespace"] = config.get("input_namespace", "in_namespace")
 config["input_filename"] = config.get("input_filename", "in_file")
 config["output_namespace"] = config.get("output_namespace", "out_namespace:")
