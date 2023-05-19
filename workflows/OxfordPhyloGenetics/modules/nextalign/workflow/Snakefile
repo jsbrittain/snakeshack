@@ -1,0 +1,23 @@
+configfile : "config/config.yaml"
+
+rule nextalign:
+    input:
+        expand(
+            "results/{indir}/{infile}",
+            indir=config["input_namespace"]["gisaid"],
+            infile=config["input_filename"]["gisaid"],
+        ),
+    output:
+        expand(
+            "results/{indir}/{infile}",
+            indir=config["output_namespace"],
+            infile=config["output_filename"],
+        ),
+    log:
+        "logs/nextalign.log",
+    benchmark:
+        "benchmarks/nextalign.txt"
+    conda:
+        "envs/nextalign.yaml"
+    shell:
+        "workflow/scripts/nextalign/run_nextalign.sh -i {input}"
