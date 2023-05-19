@@ -1,0 +1,28 @@
+configfile : "config/config.yaml"
+
+rule extract_nextclade_sequences:
+    input:
+        seqids=expand(
+            "results/{indir}/{infile}",
+            indir=config["input_namespace"]["seqids"],
+            infile=config["input_filename"]["seqids"],
+        ),
+        fasta=expand(
+            "results/{indir}/{infile}",
+            indir=config["input_namespace"]["fasta"],
+            infile=config["input_filename"]["fasta"],
+        ),
+    output:
+        expand(
+            "results/{outdir}/{outfile}",
+            outdir=config["output_namespace"],
+            outfile=config["output_filename"],
+        ),
+    log:
+        "logs/extract_nextclade_sequences.log",
+    benchmark:
+        "benchmarks/extract_nextclade_sequences.txt"
+    conda:
+        "envs/extract_nextclade_sequences.yaml"
+    shell:
+        "workflow/scripts/extract_nextclade_sequences/extract_nextclade_sequences.sh -i {input.seqids} -m {input.fasta} -o {output}"
