@@ -1,0 +1,28 @@
+configfile : "config/config.yaml"
+
+rule add_reference_sequence:
+    input:
+        ref=expand(
+            "results/{indir}/{infile}",
+            indir=config["input_namespace"]["ref"],
+            infile=config["input_filename"]["ref"],
+        ),
+        clean=expand(
+            "results/{indir}/{infile}",
+            indir=config["input_namespace"]["clean"],
+            infile=config["input_filename"]["clean"],
+        ),
+    output:
+        expand(
+            "results/{indir}/{infile}",
+            indir=config["output_namespace"],
+            infile=config["output_filename"],
+        ),
+    log:
+        "logs/add_reference_sequence.log",
+    benchmark:
+        "benchmarks/add_reference_sequence.txt"
+    conda:
+        "envs/add_reference_sequence.yaml"
+    shell:
+        "cat {input.ref} {input.clean} > {output}"
