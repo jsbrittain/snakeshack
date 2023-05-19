@@ -3,7 +3,7 @@ configfile : "config/config.yaml"
 rule process_owid_case_data:
     input:
         expand(
-            "results/{outdir}{infile}",
+            "results/{outdir}/{infile}",
             outdir=config["input_namespace"],
             infile=config["input_filename"],
         ),
