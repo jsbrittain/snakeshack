@@ -1,0 +1,33 @@
+configfile: "config/config.yaml"
+
+rule subsample_gis_owid:
+    input:
+        gis=expand(
+            "results/{indir}/{infile}",
+            indir=config["input_namespace"]["gisaid"],
+            infile=config["input_filename"]["gisaid"],
+        ),
+        owid=expand(
+            "results/{indir}/{infile}",
+            indir=config["input_namespace"]["owid"],
+            infile=config["input_filename"]["owid"],
+        ),
+    output:
+        expand(
+            "results/{outdir}/{outfile}",
+            outdir=config["output_namespace"],
+            outfile=config["output_filename"],
+        ),
+    params:
+        variant=config["subsampling"]["variant"],
+        target_number_of_sequences=config["subsampling"]["target_number_of_sequences"],
+        start_month=config["subsampling"]["start_month"],
+        end_month=config["subsampling"]["end_month"],
+    log:
+        "logs/subsample_gis_owid.log",
+    benchmark:
+        "benchmarks/subsample_gis_owid.txt"
+    conda:
+        "envs/subsample_gis_owid.yaml"
+    shell:
+        'workflow/scripts/subsample_gis_casedata/case_incidence-informed_subsampling.R {params.variant} {params.target_number_of_sequences} --start_month "{params.start_month}" --end_month "{params.end_month}" --metadata_infile {input.gis} --case_data_infile {input.owid} --outfile {output}'
