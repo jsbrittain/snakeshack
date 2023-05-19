@@ -1,0 +1,23 @@
+configfile : "config/config.yaml"
+
+rule process_owid_case_data:
+    input:
+        expand(
+            "results/{outdir}{infile}",
+            outdir=config["input_namespace"],
+            infile=config["input_filename"],
+        ),
+    output:
+        expand(
+            "results/{outdir}/{outfile}",
+            outdir=config["output_namespace"],
+            outfile=config["output_filename"],
+        ),
+    log:
+        "logs/owid.log",
+    benchmark:
+        "benchmarks/owid.txt"
+    conda:
+        "envs/owid.yaml"
+    shell:
+        "workflow/scripts/owid_preprocess/process_owid_case_data.R {input} --outfile {output}"
