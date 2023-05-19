@@ -1,0 +1,15 @@
+configfile : "config/config.yaml"
+
+rule extract_nextclade_seq_names:
+    input:
+        "results/nextclade/nextclade.tsv",
+    output:
+        "results/extract_nextclade_seq_names/subsampled_passed_seq_ids.txt",
+    log:
+        "logs/extract_nextclade_seq_names.log",
+    benchmark:
+        "benchmarks/extract_nextclade_seq_names.txt"
+    conda:
+        "envs/extract_nextclade_seq_names.yaml"
+    shell:
+        "workflow/scripts/extract_nextclade_seq_names/extract_nextclade_seq_names.sh -i {input} -o {output}"
