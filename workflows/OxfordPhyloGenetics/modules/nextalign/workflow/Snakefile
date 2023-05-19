@@ -4,8 +4,8 @@ rule nextalign:
     input:
         expand(
             "results/{indir}/{infile}",
-            indir=config["input_namespace"]["gisaid"],
-            infile=config["input_filename"]["gisaid"],
+            indir=config["input_namespace"],
+            infile=config["input_filename"],
         ),
     output:
         expand(
