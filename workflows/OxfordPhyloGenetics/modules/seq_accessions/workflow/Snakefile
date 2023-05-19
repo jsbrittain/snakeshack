@@ -1,0 +1,23 @@
+configfile : "config/config.yaml"
+
+rule seq_accessions:
+    input:
+        expand(
+            "results/{indir}/{infile}",
+            indir=config["input_namespace"],
+            infile=config["input_filename"],
+        ),
+    output:
+        expand(
+            "results/{outdir}/{outfile}",
+            outdir=config["output_namespace"],
+            outfile=config["output_filename"],
+        ),
+    log:
+        "logs/seq_accessions.log",
+    benchmark:
+        "benchmarks/seq_accessions.txt"
+    conda:
+        "envs/seq_accessions.yaml"
+    shell:
+        "workflow/scripts/seq_accessions/extract_accessions.sh -i {input} -o {output}"
