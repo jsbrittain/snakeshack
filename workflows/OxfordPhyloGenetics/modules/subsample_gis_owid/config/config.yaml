@@ -1,0 +1,5 @@
+subsampling :
+  variant : "Delta"
+  target_number_of_sequences : 5000
+  start_month : "2020-08"
+  end_month : "2021-08"
