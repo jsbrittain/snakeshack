@@ -11,10 +11,10 @@ def get_address_ext():
     return os.path.splitext(get_address_filename())[1]
 
 
-def get_infile_filename():
-    address = config["infile"]
+def get_filename_filename():
+    address = config["output_filename"]
     return os.path.basename(address).split("?")[0]
 
 
-def strip_infile_ext():
-    return os.path.splitext(get_infile_filename())[0]
+def strip_filename_ext():
+    return os.path.splitext(get_filename_filename())[0]
