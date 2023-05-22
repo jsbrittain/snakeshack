@@ -20,7 +20,7 @@ rule get_remote_file:
     benchmark:
         "benchmarks/{params.outdir}/{params.filename}.txt"
     conda:
-        "conda.yaml"
+        "envs/conda.yaml"
     shell:
         "wget {params.address} -O {output}"
 
@@ -47,7 +47,7 @@ rule rename:
     benchmark:
         "benchmarks/{params.outdir}/{params.filename}.txt"
     conda:
-        "conda.yaml"
+        "envs/conda.yaml"
     shell:
         "mv {input} {output}"
 
@@ -73,7 +73,7 @@ rule gunzip:
     benchmark:
         "benchmarks/{params.outdir}/{params.unzipped}.txt"
     conda:
-        "conda.yaml"
+        "envs/conda.yaml"
     shell:
         "gunzip {input}"
 
@@ -99,7 +99,7 @@ rule untar:
     benchmark:
         "benchmarks/{params.outdir}/{params.filename}.txt"
     conda:
-        "conda.yaml"
+        "envs/conda.yaml"
     shell:
         "tar xvf {input} --directory results/{params.outdir} && rm {input}"
 
