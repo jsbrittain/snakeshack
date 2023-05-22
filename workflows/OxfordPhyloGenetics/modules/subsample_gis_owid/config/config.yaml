@@ -1,3 +1,6 @@
+input_namespace :
+  gis : null
+  owid : null
 subsampling :
   variant : "Delta"
   target_number_of_sequences : 5000
