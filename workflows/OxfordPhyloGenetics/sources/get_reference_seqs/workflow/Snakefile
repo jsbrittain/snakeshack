@@ -1,6 +1,6 @@
 configfile : "config/config.yaml"
 
-module get_owid:
+module get_reference_seqs:
     snakefile:
         github(
             "jsbrittain/snakeshack",
@@ -9,4 +9,4 @@ module get_owid:
         )
     config: config
 
-use rule * from get_owid as get_owid_*
+use rule * from get_reference_seqs as get_reference_seqs_*
