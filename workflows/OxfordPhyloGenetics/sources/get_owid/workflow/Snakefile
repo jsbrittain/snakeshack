@@ -1,0 +1,11 @@
+configfile : "config/config.yaml"
+
+module get_owid:
+    snakefile:
+        github(
+            "jsbrittain/snakeshack",
+            path="workflows/OxfordPhyloGenetics/sources/get_remote_file/workflow/Snakefile",
+            branch="main",
+        )
+
+use rule * from get_owid as get_owid_*
