@@ -1,0 +1,4 @@
+input_namespace : "gisaid_subsampled_seqs"
+input_filename : "subsampled_sequences.fasta"
+output_namespace : "nextclade"
+output_filename : "nextclade.tsv"

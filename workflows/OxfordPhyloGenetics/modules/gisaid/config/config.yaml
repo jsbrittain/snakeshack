@@ -1,0 +1,4 @@
+input_namespace : "gisaid"
+input_filename : "gisaid_metadata.tsv"
+output_namespace : "gisaid_subsampled_seqs"
+output_filename : "processed_gisaid_metadata.tsv"

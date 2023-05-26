@@ -1,0 +1,4 @@
+input_namespace : "add_reference_sequence"
+input_filename : "subsampled_passed_sequences_refAdded.fasta"
+output_namespace : "nextalign"
+output_filename : "nextalign.fasta"

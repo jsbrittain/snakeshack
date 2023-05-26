@@ -1,3 +1,8 @@
 input_namespace :
-  ref : null
-  clean : null
+  ref : "reference_seqs"
+  clean : "extract_nextclade_sequences"
+input_filename :
+  ref : "reference.fasta"
+  clean : "subsampled_passed_sequences.fasta"
+output_namespace : "add_reference_sequence"
+output_filename : "subsampled_passed_sequences_refAdded.fasta"

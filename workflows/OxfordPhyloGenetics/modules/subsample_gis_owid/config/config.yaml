@@ -1,6 +1,12 @@
 input_namespace :
-  gis : null
-  owid : null
+  gis : "gisaid_subsampled_seqs"
+  owid : "processed_owid_case_data"
+input_filename :
+  gis : "processed_gisaid_metadata.tsv"
+  owid : "processed_owid_case_data.csv"
+output_namespace : "subsample_gis_owid"
+output_filename : "subsampled_gisaid_metadata.tsv"
+
 subsampling :
   variant : "Delta"
   target_number_of_sequences : 5000

@@ -1,4 +1,8 @@
 input_namespace :
-  seqids : null
-  fasta : null
+  seqids : "extract_nextclade_seq_names"
+  fasta : "gisaid_subsampled_seqs"
+input_filename :
+  seqids : "subsampled_passed_seq_ids.txt"
+  fasta : "subsampled_sequences.fasta"
+output_namespace : "extract_nextclade_sequences"
 output_filename : "subsampled_passed_sequences.fasta"

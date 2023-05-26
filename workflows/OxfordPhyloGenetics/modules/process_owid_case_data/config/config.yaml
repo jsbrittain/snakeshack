@@ -1,0 +1,4 @@
+input_namespace : "owid"
+input_filename : "owid-covid-data.csv"
+output_namespace : "processed_owid_case_data"
+output_filename : "processed_owid_case_data.csv"

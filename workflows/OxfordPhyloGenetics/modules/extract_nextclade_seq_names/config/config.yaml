@@ -1,0 +1,4 @@
+input_namespace : "nextclade"
+input_filename : "nextclade.tsv"
+output_namespace : "extract_nextclade_seq_names"
+output_filename : "subsampled_passed_seq_ids.txt"
