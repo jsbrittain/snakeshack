@@ -3,7 +3,7 @@ input_namespace :
   owid : "processed_owid_case_data"
 input_filename :
   gis : "gisaid_metadata.tsv"
-  owid : "owid-covid-data.csv"
+  owid : "processed_owid_case_data.csv"
 output_namespace : "subsample_gis_owid"
 output_filename : "subsampled_gisaid_metadata.tsv"
 
