@@ -22,4 +22,4 @@ rule process_owid_case_data:
     conda:
         "envs/conda.yaml"
     shell:
-        "{params.cmd} {input} --outfile {output}"
+        "Rscript {params.cmd} {input} --outfile {output}"
