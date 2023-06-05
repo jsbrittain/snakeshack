@@ -22,5 +22,7 @@ rule gisaid:
         "benchmarks/gisaid.txt"
     conda:
         "envs/conda.yaml"
+    params:
+        cmd=workflow.source_path("workflow/scripts/process_gisaid_metadata.R")
     shell:
-        "workflow/scripts/process_gisaid_metadata.R {input} --outfile {output}"
+        "{params.cmd} {input} --outfile {output}"
