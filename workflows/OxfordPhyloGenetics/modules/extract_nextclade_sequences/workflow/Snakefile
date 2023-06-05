@@ -22,7 +22,9 @@ rule extract_nextclade_sequences:
         "logs/extract_nextclade_sequences.log",
     benchmark:
         "benchmarks/extract_nextclade_sequences.txt"
+    params:
+        cmd=source_path("scripts/extract_nextclade_sequences.sh")
     conda:
         "envs/conda.yaml"
     shell:
-        "workflow/scripts/extract_nextclade_sequences.sh -i {input.seqids} -m {input.fasta} -o {output}"
+        "{params.cmd} -i {input.seqids} -m {input.fasta} -o {output}"

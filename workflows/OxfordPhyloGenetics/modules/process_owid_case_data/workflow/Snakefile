@@ -17,7 +17,9 @@ rule process_owid_case_data:
         "logs/owid.log",
     benchmark:
         "benchmarks/owid.txt"
+    params:
+        cmd=workflow.source_path("scripts/process_owid_case_data.R")
     conda:
         "envs/conda.yaml"
     shell:
-        "workflow/scripts/process_owid_case_data.R {input} --outfile {output}"
+        "{params.cmd} {input} --outfile {output}"

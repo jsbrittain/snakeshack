@@ -23,6 +23,7 @@ rule subsample_gis_owid:
         target_number_of_sequences=config["subsampling"]["target_number_of_sequences"],
         start_month=config["subsampling"]["start_month"],
         end_month=config["subsampling"]["end_month"],
+        cmd=workflow.source_path("scripts/case_incidence-informed_subsampling.R"),
     log:
         "logs/subsample_gis_owid.log",
     benchmark:
@@ -30,4 +31,4 @@ rule subsample_gis_owid:
     conda:
         "envs/conda.yaml"
     shell:
-        'workflow/scripts/case_incidence-informed_subsampling.R {params.variant} {params.target_number_of_sequences} --start_month "{params.start_month}" --end_month "{params.end_month}" --metadata_infile {input.gis} --case_data_infile {input.owid} --outfile {output}'
+        '{params.cmd} {params.variant} {params.target_number_of_sequences} --start_month "{params.start_month}" --end_month "{params.end_month}" --metadata_infile {input.gis} --case_data_infile {input.owid} --outfile {output}'

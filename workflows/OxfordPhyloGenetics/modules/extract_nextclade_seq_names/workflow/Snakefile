@@ -9,7 +9,9 @@ rule extract_nextclade_seq_names:
         "logs/extract_nextclade_seq_names.log",
     benchmark:
         "benchmarks/extract_nextclade_seq_names.txt"
+    params:
+        cmd=workflow.source_path("scripts/extract_nextclade_seq_names.sh")
     conda:
         "envs/conda.yaml"
     shell:
-        "workflow/scripts/extract_nextclade_seq_names.sh -i {input} -o {output}"
+        "{params.cmd} -i {input} -o {output}"

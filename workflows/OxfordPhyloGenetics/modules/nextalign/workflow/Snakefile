@@ -17,7 +17,9 @@ rule nextalign:
         "logs/nextalign.log",
     benchmark:
         "benchmarks/nextalign.txt"
+    params:
+        cmd=workflow.source_path("scripts/run_nextalign.sh")
     conda:
         "envs/conda.yaml"
     shell:
-        "workflow/scripts/run_nextalign.sh -i {input}"
+        "{params.cmd} -i {input}"

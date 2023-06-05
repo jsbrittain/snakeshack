@@ -17,7 +17,9 @@ rule seq_accessions:
         "logs/seq_accessions.log",
     benchmark:
         "benchmarks/seq_accessions.txt"
+    params:
+        cmd=workflow.source_path("scripts/seq_accessions/extract_accessions.sh")
     conda:
         "envs/conda.yaml"
     shell:
-        "workflow/scripts/seq_accessions/extract_accessions.sh -i {input} -o {output}"
+        "{params.cmd} -i {input} -o {output}"

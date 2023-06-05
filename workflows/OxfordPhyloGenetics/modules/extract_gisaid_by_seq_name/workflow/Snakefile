@@ -18,6 +18,8 @@ rule extract_gisaid_by_seq_name:
             indir=config["output_namespace"],
             infile=config["output_filename"],
         ),
+    params:
+        cmd=workflow.source_path("scripts/extract_gisaid_metadata_by_seq_name.sh")
     log:
         "logs/extract_gisaid_by_seq_name.log",
     benchmark:
@@ -25,4 +27,4 @@ rule extract_gisaid_by_seq_name:
     conda:
         "envs/conda.yaml"
     shell:
-        "workflow/scripts/extract_gisaid_metadata_by_seq_name.sh -i {input.seqids} -m {input.gisaid} -o {output}"
+        "{params.cmd} -i {input.seqids} -m {input.gisaid} -o {output}"
