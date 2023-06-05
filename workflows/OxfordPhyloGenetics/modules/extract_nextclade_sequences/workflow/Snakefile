@@ -23,6 +23,6 @@ rule extract_nextclade_sequences:
     benchmark:
         "benchmarks/extract_nextclade_sequences.txt"
     conda:
-        "envs/extract_nextclade_sequences.yaml"
+        "envs/conda.yaml"
     shell:
-        "workflow/scripts/extract_nextclade_sequences/extract_nextclade_sequences.sh -i {input.seqids} -m {input.fasta} -o {output}"
+        "workflow/scripts/extract_nextclade_sequences.sh -i {input.seqids} -m {input.fasta} -o {output}"

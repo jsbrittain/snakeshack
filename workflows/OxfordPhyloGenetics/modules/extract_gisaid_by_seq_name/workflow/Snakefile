@@ -23,6 +23,6 @@ rule extract_gisaid_by_seq_name:
     benchmark:
         "benchmarks/extract_gisaid_by_seq_name.txt"
     conda:
-        "envs/extract_gisaid_by_seq_name.yaml"
+        "envs/conda.yaml"
     shell:
-        "workflow/scripts/extract_gisaid_metadata_by_seq_name/extract_gisaid_metadata_by_seq_name.sh -i {input.seqids} -m {input.gisaid} -o {output}"
+        "workflow/scripts/extract_gisaid_metadata_by_seq_name.sh -i {input.seqids} -m {input.gisaid} -o {output}"

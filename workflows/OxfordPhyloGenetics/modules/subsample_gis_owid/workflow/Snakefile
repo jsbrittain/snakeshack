@@ -28,6 +28,6 @@ rule subsample_gis_owid:
     benchmark:
         "benchmarks/subsample_gis_owid.txt"
     conda:
-        "envs/subsample_gis_owid.yaml"
+        "envs/conda.yaml"
     shell:
-        'workflow/scripts/subsample_gis_casedata/case_incidence-informed_subsampling.R {params.variant} {params.target_number_of_sequences} --start_month "{params.start_month}" --end_month "{params.end_month}" --metadata_infile {input.gis} --case_data_infile {input.owid} --outfile {output}'
+        'workflow/scripts/case_incidence-informed_subsampling.R {params.variant} {params.target_number_of_sequences} --start_month "{params.start_month}" --end_month "{params.end_month}" --metadata_infile {input.gis} --case_data_infile {input.owid} --outfile {output}'

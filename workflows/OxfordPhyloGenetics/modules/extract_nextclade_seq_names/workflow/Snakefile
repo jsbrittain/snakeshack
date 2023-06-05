@@ -10,6 +10,6 @@ rule extract_nextclade_seq_names:
     benchmark:
         "benchmarks/extract_nextclade_seq_names.txt"
     conda:
-        "envs/extract_nextclade_seq_names.yaml"
+        "envs/conda.yaml"
     shell:
-        "workflow/scripts/extract_nextclade_seq_names/extract_nextclade_seq_names.sh -i {input} -o {output}"
+        "workflow/scripts/extract_nextclade_seq_names.sh -i {input} -o {output}"

@@ -21,6 +21,6 @@ rule gisaid:
     benchmark:
         "benchmarks/gisaid.txt"
     conda:
-        "envs/gisaid.yaml"
+        "envs/conda.yaml"
     shell:
-        "workflow/scripts/gisaid_preprocess/process_gisaid_metadata.R {input} --outfile {output}"
+        "workflow/scripts/process_gisaid_metadata.R {input} --outfile {output}"

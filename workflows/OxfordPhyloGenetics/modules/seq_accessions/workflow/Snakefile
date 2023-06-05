@@ -18,6 +18,6 @@ rule seq_accessions:
     benchmark:
         "benchmarks/seq_accessions.txt"
     conda:
-        "envs/seq_accessions.yaml"
+        "envs/conda.yaml"
     shell:
         "workflow/scripts/seq_accessions/extract_accessions.sh -i {input} -o {output}"

@@ -21,6 +21,6 @@ rule nextclade:
     benchmark:
         "benchmarks/nextclade.txt"
     conda:
-        "envs/nextclade.yaml"
+        "envs/conda.yaml"
     shell:
         "nextclade run --in-order --output-all={params.outdir} --input-dataset {params.indataset} {input}"

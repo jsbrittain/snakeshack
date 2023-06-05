@@ -18,6 +18,6 @@ rule nextalign:
     benchmark:
         "benchmarks/nextalign.txt"
     conda:
-        "envs/nextalign.yaml"
+        "envs/conda.yaml"
     shell:
-        "workflow/scripts/nextalign/run_nextalign.sh -i {input}"
+        "workflow/scripts/run_nextalign.sh -i {input}"

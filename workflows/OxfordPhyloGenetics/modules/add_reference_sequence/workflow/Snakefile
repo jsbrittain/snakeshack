@@ -23,6 +23,6 @@ rule add_reference_sequence:
     benchmark:
         "benchmarks/add_reference_sequence.txt"
     conda:
-        "envs/add_reference_sequence.yaml"
+        "envs/conda.yaml"
     shell:
         "cat {input.ref} {input.clean} > {output}"

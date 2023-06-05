@@ -18,6 +18,6 @@ rule process_owid_case_data:
     benchmark:
         "benchmarks/owid.txt"
     conda:
-        "envs/owid.yaml"
+        "envs/conda.yaml"
     shell:
-        "workflow/scripts/owid_preprocess/process_owid_case_data.R {input} --outfile {output}"
+        "workflow/scripts/process_owid_case_data.R {input} --outfile {output}"
