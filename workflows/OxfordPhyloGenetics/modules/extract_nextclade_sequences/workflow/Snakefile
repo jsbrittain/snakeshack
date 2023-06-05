@@ -23,7 +23,7 @@ rule extract_nextclade_sequences:
     benchmark:
         "benchmarks/extract_nextclade_sequences.txt"
     params:
-        cmd=source_path("scripts/extract_nextclade_sequences.sh")
+        cmd=workflow.source_path("scripts/extract_nextclade_sequences.sh")
     conda:
         "envs/conda.yaml"
     shell:
