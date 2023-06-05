@@ -18,7 +18,7 @@ rule seq_accessions:
     benchmark:
         "benchmarks/seq_accessions.txt"
     params:
-        cmd=workflow.source_path("scripts/seq_accessions/extract_accessions.sh")
+        cmd=workflow.source_path("scripts/extract_accessions.sh")
     conda:
         "envs/conda.yaml"
     shell:
