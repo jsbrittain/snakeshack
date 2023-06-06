@@ -2,7 +2,7 @@ input_namespace :
   seqids : "extract_nextclade_seq_names"
   gisaid : "subsample_gis_owid"
 input_filename :
-  seqids : "subsampled_pass_seq_ids.txt"
+  seqids : "subsampled_passed_seq_ids.txt"
   gisaid : "subsampled_gisaid_metadata.tsv"
 output_namespace : "extract_gisaid_by_seq_name"
 output_filename : "selected_gisaid_metadata.txt"

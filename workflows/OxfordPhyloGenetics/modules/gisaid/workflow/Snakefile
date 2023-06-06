@@ -25,4 +25,4 @@ rule gisaid:
     params:
         cmd=workflow.source_path("scripts/process_gisaid_metadata.R")
     shell:
-        "{params.cmd} {input} --outfile {output}"
+        "Rscript {params.cmd} {input} --outfile {output}"
