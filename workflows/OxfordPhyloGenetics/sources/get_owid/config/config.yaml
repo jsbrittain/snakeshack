@@ -1,2 +1,3 @@
 output_filename : "owid-covid-data.csv"
+output_namespace : "get_owid"
 address : "https://www.dropbox.com/s/x8yvgjd7ug1gbxg/owid-covid-data.csv?dl=1"

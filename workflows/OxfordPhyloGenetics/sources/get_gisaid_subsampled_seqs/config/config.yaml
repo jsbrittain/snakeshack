@@ -1,2 +1,3 @@
 address : "https://www.dropbox.com/s/jzljyxbedesm5k3/subsampled_sequences_Delta_n5000_2020-08_2021-08.fasta?dl=1"
 output_filename : "subsampled_sequences.fasta"
+output_namespace : "out"

@@ -1,2 +1,3 @@
 address : "https://www.dropbox.com/s/bfiq33slgar0fo7/gisaid_metadata_2022-03-04.tar.gz?dl=1"
 output_filename : "gisaid_metadata.tsv"
+output_namespace : "get_gisaid"
