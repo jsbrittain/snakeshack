@@ -1,0 +1,20 @@
+configfile: "config/config.yaml"
+
+rule touch:
+    output:
+        expand(
+            "results/{outdir}/{outfile}",
+            outdir=config["output_namespace"],
+            outfile=config["output_filename"]
+        )
+    log:
+        expand(
+            "logs/{outdir}.log",
+            outdir=config["output_namespace"],
+        )
+    benchmark:
+        "benchmarks/touch.txt"
+    conda:
+        "envs/conda.yaml"
+    shell:
+        "touch {output}"

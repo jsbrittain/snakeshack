@@ -1,0 +1,106 @@
+[
+  {
+    "name": "source1",
+    "type": "Module",
+    "config": {
+      "snakefile": {
+        "function": "github",
+        "args": ["jsbrittain/snakeshack"],
+        "kwargs": {
+            "path": "workflows/Examples/sources/touch/workflow/Snakefile",
+            "branch": "main"
+        }
+      },
+      "params": {
+        "output_filename" : "touch"
+      }
+    }
+  },
+  {
+    "name": "sleep1",
+    "type": "Module",
+    "config": {
+      "snakefile": {
+        "function": "github",
+        "args": ["jsbrittain/snakeshack"],
+        "kwargs": {
+            "path": "workflows/Examples/modules/sleep/workflow/Snakefile",
+            "branch": "main"
+        }
+      },
+      "params": {
+        "sleeptime" : 1,
+        "input_filename" : "touch",
+        "output_filename" : "touch"
+      }
+    }
+  },
+  {
+    "name": "sleep2",
+    "type": "Module",
+    "config": {
+      "snakefile": {
+        "function": "github",
+        "args": ["jsbrittain/snakeshack"],
+        "kwargs": {
+            "path": "workflows/Examples/modules/sleep/workflow/Snakefile",
+            "branch": "main"
+        }
+      },
+      "params": {
+        "sleeptime" : 2,
+        "input_filename" : "touch",
+        "output_filename" : "touch"
+      }
+    }
+  },
+  {
+    "name": "sleep3",
+    "type": "Module",
+    "config": {
+      "snakefile": {
+        "function": "github",
+        "args": ["jsbrittain/snakeshack"],
+        "kwargs": {
+            "path": "workflows/Examples/modules/sleep/workflow/Snakefile",
+            "branch": "main"
+        }
+      },
+      "params": {
+        "sleeptime" : 3,
+        "input_filename" : "touch",
+        "output_filename" : "touch"
+      }
+    }
+  },
+  {
+    "name": "Join [->sleep1]",
+    "type": "Connector",
+    "config": {
+      "map": [
+        "source1",
+        "sleep1"
+      ]
+    }
+  },
+  {
+    "name": "Join [->sleep2]",
+    "type": "Connector",
+    "config": {
+      "map": [
+        "sleep1",
+        "sleep2"
+      ]
+    }
+  },
+  {
+    "name": "Join [->sleep3]",
+    "type": "Connector",
+    "config": {
+      "map": [
+        "sleep2",
+        "sleep3"
+      ]
+    }
+  }
+]
