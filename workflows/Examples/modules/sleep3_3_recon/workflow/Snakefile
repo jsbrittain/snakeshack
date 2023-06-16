@@ -2,85 +2,133 @@ configfile: "config/config.yaml"
 
 module source1:
     snakefile:
-        config["source1"]["snakefile"]
+        eval(
+            f'{config["source1"]["snakefile"]["function"]}'
+            '(*config["source1"]["snakefile"]["args"],'
+            '**config["source1"]["snakefile"]["kwargs"])'
+        )
     config:
         config["source1"]["config"]
 use rule * from source1 as source1_*
 
 module sleep1:
     snakefile:
-        config["sleep1"]["snakefile"]
+        eval(
+            f'{config["sleep1"]["snakefile"]["function"]}'
+            '(*config["sleep1"]["snakefile"]["args"],'
+            '**config["sleep1"]["snakefile"]["kwargs"])'
+        )
     config:
         config["sleep1"]["config"]
 use rule * from sleep1 as sleep1_*
 
 module sleep2:
     snakefile:
-        config["sleep2"]["snakefile"]
+        eval(
+            f'{config["sleep2"]["snakefile"]["function"]}'
+            '(*config["sleep2"]["snakefile"]["args"],'
+            '**config["sleep2"]["snakefile"]["kwargs"])'
+        )
     config:
         config["sleep2"]["config"]
 use rule * from sleep2 as sleep2_*
 
 module sleep3:
     snakefile:
-        config["sleep3"]["snakefile"]
+        eval(
+            f'{config["sleep3"]["snakefile"]["function"]}'
+            '(*config["sleep3"]["snakefile"]["args"],'
+            '**config["sleep3"]["snakefile"]["kwargs"])'
+        )
     config:
         config["sleep3"]["config"]
 use rule * from sleep3 as sleep3_*
 
-module source1:
+module source1_930907771:
     snakefile:
-        config["source1"]["snakefile"]
+        eval(
+            f'{config["source1_930907771"]["snakefile"]["function"]}'
+            '(*config["source1_930907771"]["snakefile"]["args"],'
+            '**config["source1_930907771"]["snakefile"]["kwargs"])'
+        )
     config:
-        config["source1"]["config"]
-use rule * from source1 as source1_*
+        config["source1_930907771"]["config"]
+use rule * from source1_930907771 as source1_930907771_*
 
-module sleep1:
+module sleep1_1430884947:
     snakefile:
-        config["sleep1"]["snakefile"]
+        eval(
+            f'{config["sleep1_1430884947"]["snakefile"]["function"]}'
+            '(*config["sleep1_1430884947"]["snakefile"]["args"],'
+            '**config["sleep1_1430884947"]["snakefile"]["kwargs"])'
+        )
     config:
-        config["sleep1"]["config"]
-use rule * from sleep1 as sleep1_*
+        config["sleep1_1430884947"]["config"]
+use rule * from sleep1_1430884947 as sleep1_1430884947_*
 
-module sleep2:
+module sleep2_1304487490:
     snakefile:
-        config["sleep2"]["snakefile"]
+        eval(
+            f'{config["sleep2_1304487490"]["snakefile"]["function"]}'
+            '(*config["sleep2_1304487490"]["snakefile"]["args"],'
+            '**config["sleep2_1304487490"]["snakefile"]["kwargs"])'
+        )
     config:
-        config["sleep2"]["config"]
-use rule * from sleep2 as sleep2_*
+        config["sleep2_1304487490"]["config"]
+use rule * from sleep2_1304487490 as sleep2_1304487490_*
 
-module sleep3:
+module sleep3_625048969:
     snakefile:
-        config["sleep3"]["snakefile"]
+        eval(
+            f'{config["sleep3_625048969"]["snakefile"]["function"]}'
+            '(*config["sleep3_625048969"]["snakefile"]["args"],'
+            '**config["sleep3_625048969"]["snakefile"]["kwargs"])'
+        )
     config:
-        config["sleep3"]["config"]
-use rule * from sleep3 as sleep3_*
+        config["sleep3_625048969"]["config"]
+use rule * from sleep3_625048969 as sleep3_625048969_*
 
-module source1:
+module source1_432026565:
     snakefile:
-        config["source1"]["snakefile"]
+        eval(
+            f'{config["source1_432026565"]["snakefile"]["function"]}'
+            '(*config["source1_432026565"]["snakefile"]["args"],'
+            '**config["source1_432026565"]["snakefile"]["kwargs"])'
+        )
     config:
-        config["source1"]["config"]
-use rule * from source1 as source1_*
+        config["source1_432026565"]["config"]
+use rule * from source1_432026565 as source1_432026565_*
 
-module sleep1:
+module sleep1_1425581169:
     snakefile:
-        config["sleep1"]["snakefile"]
+        eval(
+            f'{config["sleep1_1425581169"]["snakefile"]["function"]}'
+            '(*config["sleep1_1425581169"]["snakefile"]["args"],'
+            '**config["sleep1_1425581169"]["snakefile"]["kwargs"])'
+        )
     config:
-        config["sleep1"]["config"]
-use rule * from sleep1 as sleep1_*
+        config["sleep1_1425581169"]["config"]
+use rule * from sleep1_1425581169 as sleep1_1425581169_*
 
-module sleep2:
+module sleep2_1308969523:
     snakefile:
-        config["sleep2"]["snakefile"]
+        eval(
+            f'{config["sleep2_1308969523"]["snakefile"]["function"]}'
+            '(*config["sleep2_1308969523"]["snakefile"]["args"],'
+            '**config["sleep2_1308969523"]["snakefile"]["kwargs"])'
+        )
     config:
-        config["sleep2"]["config"]
-use rule * from sleep2 as sleep2_*
+        config["sleep2_1308969523"]["config"]
+use rule * from sleep2_1308969523 as sleep2_1308969523_*
 
-module sleep3:
+module sleep3_397507604:
     snakefile:
-        config["sleep3"]["snakefile"]
+        eval(
+            f'{config["sleep3_397507604"]["snakefile"]["function"]}'
+            '(*config["sleep3_397507604"]["snakefile"]["args"],'
+            '**config["sleep3_397507604"]["snakefile"]["kwargs"])'
+        )
     config:
-        config["sleep3"]["config"]
-use rule * from sleep3 as sleep3_*
+        config["sleep3_397507604"]["config"]
+use rule * from sleep3_397507604 as sleep3_397507604_*
 

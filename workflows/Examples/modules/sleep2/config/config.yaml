@@ -1,3 +1,5 @@
+input_namespace: sleep1
+output_namespace: sleep2
 sleep1:
   config:
     input_filename: touch

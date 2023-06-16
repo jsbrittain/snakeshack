@@ -1,0 +1,79 @@
+[
+  {
+    "name": "sleep2_A",
+    "type": "Module",
+    "config": {
+      "snakefile": {
+        "function": "github",
+        "args": ["jsbrittain/snakeshack"],
+        "kwargs": {
+            "path": "workflows/Examples/modules/sleep2/workflow/Snakefile",
+            "branch": "main"
+        }
+      },
+      "params": {
+        "input_filename" : "touch",
+        "output_filename" : "touch",
+        "sleep_time": 1
+      }
+    }
+  },
+  {
+    "name": "sleep2_B",
+    "type": "Module",
+    "config": {
+      "snakefile": {
+        "function": "github",
+        "args": ["jsbrittain/snakeshack"],
+        "kwargs": {
+            "path": "workflows/Examples/modules/sleep2/workflow/Snakefile",
+            "branch": "main"
+        }
+      },
+      "params": {
+        "input_filename" : "touch",
+        "output_filename" : "touch",
+        "sleep_time": 1
+      }
+    }
+  },
+  {
+    "name": "sleep2_C",
+    "type": "Module",
+    "config": {
+      "snakefile": {
+        "function": "github",
+        "args": ["jsbrittain/snakeshack"],
+        "kwargs": {
+            "path": "workflows/Examples/modules/sleep2/workflow/Snakefile",
+            "branch": "main"
+        }
+      },
+      "params": {
+        "input_filename" : "touch",
+        "output_filename" : "touch",
+        "sleep_time": 1
+      }
+    }
+  },
+  {
+    "name": "Join [->sleep2_B]",
+    "type": "Connector",
+    "config": {
+      "map": [
+        "sleep2_A",
+        "sleep2_B"
+      ]
+    }
+  },
+  {
+    "name": "Join [->sleep2_C]",
+    "type": "Connector",
+    "config": {
+      "map": [
+        "sleep2_B",
+        "sleep2_C"
+      ]
+    }
+  }
+]
