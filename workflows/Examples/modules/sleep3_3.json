@@ -7,7 +7,7 @@
         "function": "github",
         "args": ["jsbrittain/snakeshack"],
         "kwargs": {
-            "path": "workflows/Examples/sources/sleep3/workflow/Snakefile",
+            "path": "workflows/Examples/modules/sleep3/workflow/Snakefile",
             "branch": "main"
         }
       },
@@ -26,7 +26,7 @@
         "function": "github",
         "args": ["jsbrittain/snakeshack"],
         "kwargs": {
-            "path": "workflows/Examples/sources/sleep3/workflow/Snakefile",
+            "path": "workflows/Examples/modules/sleep3/workflow/Snakefile",
             "branch": "main"
         }
       },
@@ -45,7 +45,7 @@
         "function": "github",
         "args": ["jsbrittain/snakeshack"],
         "kwargs": {
-            "path": "workflows/Examples/sources/sleep3/workflow/Snakefile",
+            "path": "workflows/Examples/modules/sleep3/workflow/Snakefile",
             "branch": "main"
         }
       },

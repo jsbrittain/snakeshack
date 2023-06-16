@@ -11,7 +11,7 @@ sleep3_a:
     function: github
     kwargs:
       branch: main
-      path: workflows/Examples/sources/sleep3/workflow/Snakefile
+      path: workflows/Examples/modules/sleep3/workflow/Snakefile
 sleep3_b:
   config:
     input_filename: touch
@@ -25,7 +25,7 @@ sleep3_b:
     function: github
     kwargs:
       branch: main
-      path: workflows/Examples/sources/sleep3/workflow/Snakefile
+      path: workflows/Examples/modules/sleep3/workflow/Snakefile
 sleep3_c:
   config:
     input_filename: touch
@@ -39,4 +39,4 @@ sleep3_c:
     function: github
     kwargs:
       branch: main
-      path: workflows/Examples/sources/sleep3/workflow/Snakefile
+      path: workflows/Examples/modules/sleep3/workflow/Snakefile
