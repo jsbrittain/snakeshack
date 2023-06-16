@@ -1,0 +1,42 @@
+sleep3_a:
+  config:
+    input_filename: touch
+    input_namespace: ''
+    output_filename: touch
+    output_namespace: sleep3_a
+    sleep_time: 1
+  snakefile:
+    args:
+    - jsbrittain/snakeshack
+    function: github
+    kwargs:
+      branch: main
+      path: workflows/Examples/sources/sleep3/workflow/Snakefile
+sleep3_b:
+  config:
+    input_filename: touch
+    input_namespace: sleep3_a
+    output_filename: touch
+    output_namespace: sleep3_b
+    sleep_time: 1
+  snakefile:
+    args:
+    - jsbrittain/snakeshack
+    function: github
+    kwargs:
+      branch: main
+      path: workflows/Examples/sources/sleep3/workflow/Snakefile
+sleep3_c:
+  config:
+    input_filename: touch
+    input_namespace: sleep3_b
+    output_filename: touch
+    output_namespace: sleep3_c
+    sleep_time: 1
+  snakefile:
+    args:
+    - jsbrittain/snakeshack
+    function: github
+    kwargs:
+      branch: main
+      path: workflows/Examples/sources/sleep3/workflow/Snakefile
