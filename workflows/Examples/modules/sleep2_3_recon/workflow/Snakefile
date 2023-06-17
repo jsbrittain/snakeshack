@@ -1,0 +1,68 @@
+configfile: "config/config.yaml"
+
+module sleep1:
+    snakefile:
+        eval(
+            f'{config["sleep1"]["snakefile"]["function"]}'
+            '(*config["sleep1"]["snakefile"]["args"],'
+            '**config["sleep1"]["snakefile"]["kwargs"])'
+        )
+    config:
+        config["sleep1"]["config"]
+use rule * from sleep1 as sleep1_*
+
+module sleep2:
+    snakefile:
+        eval(
+            f'{config["sleep2"]["snakefile"]["function"]}'
+            '(*config["sleep2"]["snakefile"]["args"],'
+            '**config["sleep2"]["snakefile"]["kwargs"])'
+        )
+    config:
+        config["sleep2"]["config"]
+use rule * from sleep2 as sleep2_*
+
+module sleep1_1399554726:
+    snakefile:
+        eval(
+            f'{config["sleep1_1399554726"]["snakefile"]["function"]}'
+            '(*config["sleep1_1399554726"]["snakefile"]["args"],'
+            '**config["sleep1_1399554726"]["snakefile"]["kwargs"])'
+        )
+    config:
+        config["sleep1_1399554726"]["config"]
+use rule * from sleep1_1399554726 as sleep1_1399554726_*
+
+module sleep2_1800568389:
+    snakefile:
+        eval(
+            f'{config["sleep2_1800568389"]["snakefile"]["function"]}'
+            '(*config["sleep2_1800568389"]["snakefile"]["args"],'
+            '**config["sleep2_1800568389"]["snakefile"]["kwargs"])'
+        )
+    config:
+        config["sleep2_1800568389"]["config"]
+use rule * from sleep2_1800568389 as sleep2_1800568389_*
+
+module sleep1_899365717:
+    snakefile:
+        eval(
+            f'{config["sleep1_899365717"]["snakefile"]["function"]}'
+            '(*config["sleep1_899365717"]["snakefile"]["args"],'
+            '**config["sleep1_899365717"]["snakefile"]["kwargs"])'
+        )
+    config:
+        config["sleep1_899365717"]["config"]
+use rule * from sleep1_899365717 as sleep1_899365717_*
+
+module sleep2_402186472:
+    snakefile:
+        eval(
+            f'{config["sleep2_402186472"]["snakefile"]["function"]}'
+            '(*config["sleep2_402186472"]["snakefile"]["args"],'
+            '**config["sleep2_402186472"]["snakefile"]["kwargs"])'
+        )
+    config:
+        config["sleep2_402186472"]["config"]
+use rule * from sleep2_402186472 as sleep2_402186472_*
+
