@@ -3,14 +3,7 @@
     "name": "source1",
     "type": "Module",
     "config": {
-      "snakefile": {
-        "function": "github",
-        "args": ["jsbrittain/snakeshack"],
-        "kwargs": {
-            "path": "workflows/Examples/sources/touch/workflow/Snakefile",
-            "branch": "main"
-        }
-      },
+      "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/sources/touch/workflow/Snakefile",
       "params": {
         "input_namespace" : null,
         "output_filename" : "touch"
@@ -21,16 +14,10 @@
     "name": "sleep1",
     "type": "Module",
     "config": {
-      "snakefile": {
-        "function": "github",
-        "args": ["jsbrittain/snakeshack"],
-        "kwargs": {
-            "path": "workflows/Examples/modules/sleep/workflow/Snakefile",
-            "branch": "main"
-        }
-      },
+      "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/modules/sleep/workflow/Snakefile",
       "params": {
         "sleeptime" : 1,
+        "input_namespace" : "in",
         "input_filename" : "touch",
         "output_filename" : "touch"
       }
@@ -40,16 +27,10 @@
     "name": "sleep2",
     "type": "Module",
     "config": {
-      "snakefile": {
-        "function": "github",
-        "args": ["jsbrittain/snakeshack"],
-        "kwargs": {
-            "path": "workflows/Examples/modules/sleep/workflow/Snakefile",
-            "branch": "main"
-        }
-      },
+      "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/modules/sleep/workflow/Snakefile",
       "params": {
         "sleeptime" : 2,
+        "input_namespace" : "in",
         "input_filename" : "touch",
         "output_filename" : "touch"
       }
@@ -59,16 +40,10 @@
     "name": "sleep3",
     "type": "Module",
     "config": {
-      "snakefile": {
-        "function": "github",
-        "args": ["jsbrittain/snakeshack"],
-        "kwargs": {
-            "path": "workflows/Examples/modules/sleep/workflow/Snakefile",
-            "branch": "main"
-        }
-      },
+      "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/modules/sleep/workflow/Snakefile",
       "params": {
         "sleeptime" : 3,
+        "input_namespace" : "in",
         "input_filename" : "touch",
         "output_filename" : "touch"
       }

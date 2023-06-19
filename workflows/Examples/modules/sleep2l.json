@@ -1,0 +1,38 @@
+[
+  {
+    "name": "sleep1",
+    "type": "Module",
+    "config": {
+      "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/modules/sleep/workflow/Snakefile",
+      "params": {
+        "sleeptime" : 1,
+        "input_filename" : "touch",
+        "input_namespace" : "sleep",
+        "output_filename" : "touch"
+      }
+    }
+  },
+  {
+    "name": "sleep2",
+    "type": "Module",
+    "config": {
+      "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/modules/sleep/workflow/Snakefile",
+      "params": {
+        "sleeptime" : 2,
+        "input_filename" : "touch",
+        "input_namespace" : "sleep",
+        "output_filename" : "touch"
+      }
+    }
+  },
+  {
+    "name": "Join [->sleep2]",
+    "type": "Connector",
+    "config": {
+      "map": [
+        "sleep1",
+        "sleep2"
+      ]
+    }
+  }
+]

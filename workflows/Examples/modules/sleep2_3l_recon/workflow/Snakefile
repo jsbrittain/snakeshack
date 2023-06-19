@@ -1,0 +1,44 @@
+configfile: "config/config.yaml"
+
+module sleep1:
+    snakefile:
+        config["sleep1"]["snakefile"]
+    config:
+        config["sleep1"]["config"]
+use rule * from sleep1 as sleep1_*
+
+module sleep2:
+    snakefile:
+        config["sleep2"]["snakefile"]
+    config:
+        config["sleep2"]["config"]
+use rule * from sleep2 as sleep2_*
+
+module sleep1_2037318421:
+    snakefile:
+        config["sleep1_2037318421"]["snakefile"]
+    config:
+        config["sleep1_2037318421"]["config"]
+use rule * from sleep1_2037318421 as sleep1_2037318421_*
+
+module sleep2_1009769806:
+    snakefile:
+        config["sleep2_1009769806"]["snakefile"]
+    config:
+        config["sleep2_1009769806"]["config"]
+use rule * from sleep2_1009769806 as sleep2_1009769806_*
+
+module sleep1_1140030832:
+    snakefile:
+        config["sleep1_1140030832"]["snakefile"]
+    config:
+        config["sleep1_1140030832"]["config"]
+use rule * from sleep1_1140030832 as sleep1_1140030832_*
+
+module sleep2_1113178669:
+    snakefile:
+        config["sleep2_1113178669"]["snakefile"]
+    config:
+        config["sleep2_1113178669"]["config"]
+use rule * from sleep2_1113178669 as sleep2_1113178669_*
+

@@ -1,5 +1,5 @@
 input_namespace: sleep1
-output_namespace: sleep2_402186472
+output_namespace: sleep2_1831829253
 sleep1:
   config:
     input_filename: touch
@@ -7,6 +7,7 @@ sleep1:
     output_filename: touch
     output_namespace: sleep1
     sleeptime: 1
+  name: sleep1
   snakefile:
     args:
     - jsbrittain/snakeshack
@@ -14,13 +15,15 @@ sleep1:
     kwargs:
       branch: main
       path: workflows/Examples/modules/sleep/config/config.yaml
-sleep1_1399554726:
+  type: module
+sleep1_133346707:
   config:
     input_filename: touch
     input_namespace: sleep2
     output_filename: touch
-    output_namespace: sleep1_1399554726
+    output_namespace: sleep1_133346707
     sleeptime: 1
+  name: sleep1
   snakefile:
     args:
     - jsbrittain/snakeshack
@@ -28,13 +31,15 @@ sleep1_1399554726:
     kwargs:
       branch: main
       path: workflows/Examples/modules/sleep/config/config.yaml
-sleep1_899365717:
+  type: module
+sleep1_733535296:
   config:
     input_filename: touch
-    input_namespace: sleep2_1800568389
+    input_namespace: sleep2_1162419788
     output_filename: touch
-    output_namespace: sleep1_899365717
+    output_namespace: sleep1_733535296
     sleeptime: 1
+  name: sleep1
   snakefile:
     args:
     - jsbrittain/snakeshack
@@ -42,6 +47,7 @@ sleep1_899365717:
     kwargs:
       branch: main
       path: workflows/Examples/modules/sleep/config/config.yaml
+  type: module
 sleep2:
   config:
     input_filename: touch
@@ -49,6 +55,7 @@ sleep2:
     output_filename: touch
     output_namespace: sleep2
     sleeptime: 2
+  name: sleep2
   snakefile:
     args:
     - jsbrittain/snakeshack
@@ -56,13 +63,15 @@ sleep2:
     kwargs:
       branch: main
       path: workflows/Examples/modules/sleep/config/config.yaml
-sleep2_1800568389:
+  type: module
+sleep2_1162419788:
   config:
     input_filename: touch
-    input_namespace: sleep1_1399554726
+    input_namespace: sleep1_133346707
     output_filename: touch
-    output_namespace: sleep2_1800568389
+    output_namespace: sleep2_1162419788
     sleeptime: 2
+  name: sleep2
   snakefile:
     args:
     - jsbrittain/snakeshack
@@ -70,13 +79,15 @@ sleep2_1800568389:
     kwargs:
       branch: main
       path: workflows/Examples/modules/sleep/config/config.yaml
-sleep2_402186472:
+  type: module
+sleep2_1831829253:
   config:
     input_filename: touch
-    input_namespace: sleep1_899365717
+    input_namespace: sleep1_733535296
     output_filename: touch
-    output_namespace: sleep2_402186472
+    output_namespace: sleep2_1831829253
     sleeptime: 2
+  name: sleep2
   snakefile:
     args:
     - jsbrittain/snakeshack
@@ -84,3 +95,4 @@ sleep2_402186472:
     kwargs:
       branch: main
       path: workflows/Examples/modules/sleep/config/config.yaml
+  type: module

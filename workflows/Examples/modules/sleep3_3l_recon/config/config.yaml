@@ -1,0 +1,115 @@
+input_namespace: null
+sleep1:
+  config:
+    input_filename: touch
+    input_namespace: source1
+    output_filename: touch
+    output_namespace: sleep1
+    sleeptime: 1
+  name: sleep1
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/modules/sleep/workflow/Snakefile
+  type: module
+sleep1_1817413699:
+  config:
+    input_filename: touch
+    input_namespace: source1_2127782518
+    output_filename: touch
+    output_namespace: sleep1_1817413699
+    sleeptime: 1
+  name: sleep1
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/modules/sleep/workflow/Snakefile
+  type: module
+sleep1_61027547:
+  config:
+    input_filename: touch
+    input_namespace: source1_1601477087
+    output_filename: touch
+    output_namespace: sleep1_61027547
+    sleeptime: 1
+  name: sleep1
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/modules/sleep/workflow/Snakefile
+  type: module
+sleep2:
+  config:
+    input_filename: touch
+    input_namespace: sleep1
+    output_filename: touch
+    output_namespace: sleep2
+    sleeptime: 2
+  name: sleep2
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/modules/sleep/workflow/Snakefile
+  type: module
+sleep2_627204990:
+  config:
+    input_filename: touch
+    input_namespace: sleep1_1817413699
+    output_filename: touch
+    output_namespace: sleep2_627204990
+    sleeptime: 2
+  name: sleep2
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/modules/sleep/workflow/Snakefile
+  type: module
+sleep2_669144788:
+  config:
+    input_filename: touch
+    input_namespace: sleep1_61027547
+    output_filename: touch
+    output_namespace: sleep2_669144788
+    sleeptime: 2
+  name: sleep2
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/modules/sleep/workflow/Snakefile
+  type: module
+sleep3:
+  config:
+    input_filename: touch
+    input_namespace: sleep2
+    output_filename: touch
+    output_namespace: sleep3
+    sleeptime: 3
+  name: sleep3
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/modules/sleep/workflow/Snakefile
+  type: module
+sleep3_1128200094:
+  config:
+    input_filename: touch
+    input_namespace: sleep2_669144788
+    output_filename: touch
+    output_namespace: sleep3_1128200094
+    sleeptime: 3
+  name: sleep3
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/modules/sleep/workflow/Snakefile
+  type: module
+sleep3_641955481:
+  config:
+    input_filename: touch
+    input_namespace: sleep2_627204990
+    output_filename: touch
+    output_namespace: sleep3_641955481
+    sleeptime: 3
+  name: sleep3
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/modules/sleep/workflow/Snakefile
+  type: module
+source1:
+  config:
+    input_namespace: null
+    output_filename: touch
+    output_namespace: source1
+  name: source1
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/sources/touch/workflow/Snakefile
+  type: module
+source1_1601477087:
+  config:
+    input_namespace: null
+    output_filename: touch
+    output_namespace: source1_1601477087
+  name: source1
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/sources/touch/workflow/Snakefile
+  type: module
+source1_2127782518:
+  config:
+    input_namespace: null
+    output_filename: touch
+    output_namespace: source1_2127782518
+  name: source1
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/Examples/sources/touch/workflow/Snakefile
+  type: module

@@ -1,0 +1,23 @@
+configfile: "config/config.yaml"
+
+module sleep2_a:
+    snakefile:
+        config["sleep2_a"]["snakefile"]
+    config:
+        config["sleep2_a"]["config"]
+use rule * from sleep2_a as sleep2_a_*
+
+module sleep2_b:
+    snakefile:
+        config["sleep2_b"]["snakefile"]
+    config:
+        config["sleep2_b"]["config"]
+use rule * from sleep2_b as sleep2_b_*
+
+module sleep2_c:
+    snakefile:
+        config["sleep2_c"]["snakefile"]
+    config:
+        config["sleep2_c"]["config"]
+use rule * from sleep2_c as sleep2_c_*
+

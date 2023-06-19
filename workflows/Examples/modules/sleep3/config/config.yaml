@@ -1,3 +1,5 @@
+input_namespace: source1
+output_namespace: sleep3
 sleep1:
   config:
     input_filename: touch
@@ -5,6 +7,7 @@ sleep1:
     output_filename: touch
     output_namespace: sleep1
     sleeptime: 1
+  name: sleep1
   snakefile:
     args:
     - jsbrittain/snakeshack
@@ -12,6 +15,7 @@ sleep1:
     kwargs:
       branch: main
       path: workflows/Examples/modules/sleep/workflow/Snakefile
+  type: module
 sleep2:
   config:
     input_filename: touch
@@ -19,6 +23,7 @@ sleep2:
     output_filename: touch
     output_namespace: sleep2
     sleeptime: 2
+  name: sleep2
   snakefile:
     args:
     - jsbrittain/snakeshack
@@ -26,6 +31,7 @@ sleep2:
     kwargs:
       branch: main
       path: workflows/Examples/modules/sleep/workflow/Snakefile
+  type: module
 sleep3:
   config:
     input_filename: touch
@@ -33,6 +39,7 @@ sleep3:
     output_filename: touch
     output_namespace: sleep3
     sleeptime: 3
+  name: sleep3
   snakefile:
     args:
     - jsbrittain/snakeshack
@@ -40,11 +47,13 @@ sleep3:
     kwargs:
       branch: main
       path: workflows/Examples/modules/sleep/workflow/Snakefile
+  type: module
 source1:
   config:
-    input_namespace: ''
+    input_namespace: null
     output_filename: touch
     output_namespace: source1
+  name: source1
   snakefile:
     args:
     - jsbrittain/snakeshack
@@ -52,3 +61,4 @@ source1:
     kwargs:
       branch: main
       path: workflows/Examples/sources/touch/workflow/Snakefile
+  type: module
