@@ -1,0 +1,64 @@
+configfile: "config/config.yaml"
+
+# TODO: install python package dependencies as part of conda environment
+
+# subsample using wildcards for seed keys
+rule subsample_ids_metadata:
+    input:
+        expand(
+            "results/{indir}/{seeds_file}",
+            indir=config["input_namespace"],
+            seeds_file=config["seeds_file"],
+        )
+    output:
+        seqids=expand(
+            "results/{outdir}/s{{key}}/output_sequence_ids.txt",
+            outdir=config["output_namespace"],
+        ),
+        metadata=expand(
+            "results/{outdir}/s{{key}}/output_metadata.txt",
+            outdir=config["output_namespace"],
+        ),
+        report=expand(
+            "results/{outdir}/s{{key}}/output_report.txt",
+            outdir=config["output_namespace"],
+        )
+    params:
+        master_metadata = config["params"]["master_metadata"],
+        genome_matrix = config["params"]["genome_matrix"],
+        keep_file = config["params"]["keep_file"],
+        remove_file = config["params"]["remove_file"],
+        filter_file = config["params"]["filter_file"],
+        id_column = config["params"]["id_column"],
+        geo_column = config["params"]["geo_column"],
+        date_column = config["params"]["date_column"],
+        refgenome_size = config["params"]["refgenome_size"],
+        max_missing = config["params"]["max_missing"],
+        start_date = config["params"]["start_date"],
+        end_date = config["params"]["end_date"],
+        unit = config["params"]["unit"],
+    conda:
+        "envs/conda.yaml"
+    shell:
+        """
+        python3.10 -m pip install Bio epiweeks pycountry_convert
+        python3.10 scripts/subsampler_timeseries.py \
+            --metadata {params.master_metadata} \
+            --genome-matrix {params.genome_matrix} \
+            --max-missing {params.max_missing} \
+            --refgenome-size {params.refgenome_size} \
+            --keep {params.keep_file} \
+            --remove {params.remove_file} \
+            --filter-file {params.filter_file} \
+            --index-column {params.id_column} \
+            --geo-column {params.geo_column} \
+            --date-column {params.date_column} \
+            --time-unit {params.unit} \
+            --weekasdate no \
+            --seed {wildcards.key} \
+            --start-date {params.start_date} \
+            --end-date {params.end_date} \
+            --sampled-sequences "{output.seqids}" \
+            --sampled-metadata "{output.metadata}" \
+            --report "{output.report}"
+        """

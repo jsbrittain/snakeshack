@@ -2,3 +2,4 @@
 **/**/.snakemake
 **/**/venv
 **/**/.venv
+**/**/results/out

@@ -1,0 +1,22 @@
+configfile: "config/config.yaml"
+
+module vocpl_provide_seeds_1:
+    snakefile:
+        config["vocpl_provide_seeds_1"]["snakefile"]
+    config:
+        config["vocpl_provide_seeds_1"]["config"]
+use rule * from vocpl_provide_seeds_1 as vocpl_provide_seeds_1_*
+
+module vocpl_subsample_alignment_2:
+    snakefile:
+        config["vocpl_subsample_alignment_2"]["snakefile"]
+    config:
+        config["vocpl_subsample_alignment_2"]["config"]
+use rule * from vocpl_subsample_alignment_2 as vocpl_subsample_alignment_2_*
+
+module vocpl_subsample_ids_metadata_3:
+    snakefile:
+        config["vocpl_subsample_ids_metadata_3"]["snakefile"]
+    config:
+        config["vocpl_subsample_ids_metadata_3"]["config"]
+use rule * from vocpl_subsample_ids_metadata_3 as vocpl_subsample_ids_metadata_3_*

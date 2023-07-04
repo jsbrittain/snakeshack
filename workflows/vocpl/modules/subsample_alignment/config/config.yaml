@@ -1,0 +1,5 @@
+input_namespace: in
+output_namespace: out
+master_fasta: results/in/beta.fasta
+test:
+  seeds_file: seeds.txt

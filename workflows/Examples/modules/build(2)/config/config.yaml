@@ -1,0 +1,42 @@
+input_namespace: null
+output_namespace: vocpl_subsample_alignment_2
+vocpl_provide_seeds_1:
+  config:
+    input_namespace: null
+    output_namespace: vocpl_provide_seeds_1
+  name: (vocpl) Provide Seeds_1
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/sources/provide_seeds/workflow/Snakefile
+  type: module
+vocpl_subsample_alignment_2:
+  config:
+    input_namespace: vocpl_subsample_ids_metadata_3
+    master_fasta: results/in/beta.fasta
+    output_namespace: vocpl_subsample_alignment_2
+    test:
+      seeds_file: seeds.txt
+  name: (vocpl) Subsample Alignment_2
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/modules/subsample_alignment/workflow/Snakefile
+  type: module
+vocpl_subsample_ids_metadata_3:
+  config:
+    input_namespace: vocpl_provide_seeds_1
+    master_fasta: resources/ex_input/beta.fasta
+    output_namespace: vocpl_subsample_ids_metadata_3
+    params:
+      date_column: date
+      end_date: '2021-09-01'
+      filter_file: resources/ex_input/subsampling/filters.tsv
+      genome_matrix: resources/ex_input/subsampling/matrix_genomes_unit_corrected.tsv
+      geo_column: country_exposure
+      id_column: gisaid_epi_isl
+      keep_file: resources/ex_input/subsampling/keep.txt
+      master_metadata: resources/ex_input/beta.metadata.tsv
+      max_missing: 99
+      refgenome_size: 1
+      remove_file: resources/ex_input/subsampling/remove.txt
+      start_date: '2020-09-01'
+      unit: week
+    seeds_file: seeds.txt
+  name: (vocpl) Subsample Ids Metadata_3
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/modules/subsample_ids_metadata/workflow/Snakefile
+  type: module

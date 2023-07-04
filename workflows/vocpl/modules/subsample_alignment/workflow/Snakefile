@@ -1,0 +1,21 @@
+configfile: "config/config.yaml"
+
+rule subsample_alignment:
+    input:
+        expand(
+            "results/{indir}/s{{key}}/output_sequence_ids.txt",
+            indir=config["input_namespace"],
+        )
+    output:
+        expand(
+            "results/{outdir}/s{{key}}/subsample_aln.fasta",
+            outdir=config["output_namespace"],
+        )
+    params:
+        master_fasta=config["master_fasta"]
+    conda:
+        "envs/conda.yaml"
+    shell:
+        """
+        seqkit grep -n -f {input} {params.master_fasta} > {output}
+        """

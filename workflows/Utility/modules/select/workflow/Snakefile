@@ -1,0 +1,20 @@
+configfile: "config/config.yaml"
+
+rule select:
+    input:
+        expand(
+            "results/{indir}/{item}",
+            indir=config["input_namespace"],
+            item=config["item"],
+        )
+    output:
+        expand(
+            "results/{outdir}",
+            outdir=config["output_namespace"],
+        )
+    log:
+        "logs/select.log"
+    conda:
+        "envs/conda.yaml"
+    shell:
+        "ln -s {input} {output}"

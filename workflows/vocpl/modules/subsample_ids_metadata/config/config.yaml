@@ -1,0 +1,18 @@
+input_namespace: "in"
+output_namespace: "out"
+seeds_file: "seeds.txt"
+master_fasta: "resources/ex_input/beta.fasta"
+params:
+  master_metadata: "resources/ex_input/beta.metadata.tsv"
+  genome_matrix: "resources/ex_input/subsampling/matrix_genomes_unit_corrected.tsv"
+  keep_file: "resources/ex_input/subsampling/keep.txt"
+  remove_file: "resources/ex_input/subsampling/remove.txt"
+  filter_file: "resources/ex_input/subsampling/filters.tsv"
+  id_column: "gisaid_epi_isl"
+  geo_column: "country_exposure"
+  date_column: "date"
+  refgenome_size: 1
+  max_missing: 99
+  start_date: "2020-09-01"
+  end_date: "2021-09-01"
+  unit: "week"

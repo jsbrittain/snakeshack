@@ -1,0 +1,25 @@
+configfile: "config/config.yaml"
+
+import os
+filelist = os.listdir("resources/")
+
+rule all:
+    input:
+        expand(
+            "results/{outdir}/{filename}",
+            outdir=config["output_namespace"],
+            filename=filelist,
+        )
+
+rule provide_source:
+    input:
+        "resources/{filename}"
+    output:
+        expand(
+            "results/{outdir}/{{filename}}",
+            outdir=config["output_namespace"],
+        )
+    conda:
+        "envs/conda.yaml"
+    shell:
+        "cp resources/{wildcards.filename} {output}"
