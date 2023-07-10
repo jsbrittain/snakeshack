@@ -1,5 +1,7 @@
 configfile: "config/config.yaml"
 
+from pathlib import Path
+
 rule nextalign:
     input:
         expand(
@@ -16,8 +18,7 @@ rule nextalign:
         reference=config["params"]["reference"],
         genemap=config["params"]["genemap"],
         genes=config["params"]["genes"],
-        outdir=config["output_namespace"],
-        subsample_prealign_fasta=config["params"]["subsample_prealign_fasta"],
+        outdir = lambda wildcards, output: Path(output[0]).parent
     conda:
         "envs/conda.yaml"
     shell:
@@ -27,5 +28,5 @@ rule nextalign:
             --genemap={params.genemap} \
             --genes={params.genes} \
             --output-all={params.outdir} \
-            {params.subsample_prealign_fasta}
+            {input}
         """

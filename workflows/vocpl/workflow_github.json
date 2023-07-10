@@ -4,7 +4,14 @@
         "name": "(vocpl) Provide Seeds_1",
         "type": "source",
         "config": {
-            "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/sources/provide_seeds/workflow/Snakefile",
+            "snakefile": {
+                "function": "github",
+                "args": ["jsbrittain/snakeshack"],
+                "kwargs": {
+                    "path": "workflows/vocpl/sources/provide_seeds/workflow/Snakefile",
+                    "branch": "main"
+                }
+            },
             "config": {
                 "output_namespace": "out"
             }
@@ -15,7 +22,14 @@
         "name": "(vocpl) Nextalign_4",
         "type": "module",
         "config": {
-            "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/modules/nextalign/workflow/Snakefile",
+            "snakefile": {
+                "function": "github",
+                "args": ["jsbrittain/snakeshack"],
+                "kwargs": {
+                    "path": "workflows/vocpl/modules/nextalign/workflow/Snakefile",
+                    "branch": "main"
+                }
+            },
             "config": {
                 "input_namespace": "in",
                 "output_namespace": "out",
@@ -33,7 +47,14 @@
         "name": "(vocpl) Subsample Alignment_3",
         "type": "module",
         "config": {
-            "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/modules/subsample_alignment/workflow/Snakefile",
+            "snakefile": {
+                "function": "github",
+                "args": ["jsbrittain/snakeshack"],
+                "kwargs": {
+                    "path": "workflows/vocpl/modules/subsample_alignment/workflow/Snakefile",
+                    "branch": "main"
+                }
+            },
             "config": {
                 "input_namespace": "in",
                 "output_namespace": "out",
@@ -49,7 +70,14 @@
         "name": "(vocpl) Subsample Ids Metadata_4",
         "type": "module",
         "config": {
-            "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/modules/subsample_ids_metadata/workflow/Snakefile",
+            "snakefile": {
+                "function": "github",
+                "args": ["jsbrittain/snakeshack"],
+                "kwargs": {
+                    "path": "workflows/vocpl/sources/subsample_ids_metadata/workflow/Snakefile",
+                    "branch": "main"
+                }
+            },
             "config": {
                 "input_namespace": "in",
                 "output_namespace": "out",
