@@ -1,8 +1,14 @@
 configfile: "config/config.yaml"
 
+from snakemake.remote import AUTO
+
+REMOTE_PATH = "https://github.com/jsbrittain/snakeshack/raw/main/workflows/vocpl/modules/provide_seeds"
+function remote(filename)
+    return AUTO.remote(path + "/" + filename)
+
 rule provide_seeds:
     input:
-        "resources/seeds.txt"
+        remote("resources/seeds.txt")
     output:
         expand(
             "results/{outdir}/seeds.txt",
@@ -11,4 +17,4 @@ rule provide_seeds:
     conda:
         "envs/conda.yaml"
     shell:
-        "cp resources/seeds.txt {output}"
+        "cp {input} {output}"
