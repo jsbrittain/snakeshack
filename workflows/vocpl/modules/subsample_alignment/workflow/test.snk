@@ -1,7 +1,7 @@
 configfile: "config/config.yaml"
 
 # read seeds from file
-with open("results/" + config["input_namespace"] + "/" + config["test"]["seeds_file"]) as f:
+with open("results/in/seeds.txt") as f:
     keys = f.read().splitlines()
 
 # default target all seeds listed in the seeds file

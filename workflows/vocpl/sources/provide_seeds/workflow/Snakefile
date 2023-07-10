@@ -1,25 +1,14 @@
 configfile: "config/config.yaml"
 
-import os
-filelist = os.listdir("resources/")
-
-rule all:
+rule provide_seeds:
     input:
-        expand(
-            "results/{outdir}/{filename}",
-            outdir=config["output_namespace"],
-            filename=filelist,
-        )
-
-rule provide_source:
-    input:
-        "resources/{filename}"
+        "resources/seeds.txt"
     output:
         expand(
-            "results/{outdir}/{{filename}}",
+            "results/{outdir}/seeds.txt",
             outdir=config["output_namespace"],
         )
     conda:
         "envs/conda.yaml"
     shell:
-        "cp resources/{wildcards.filename} {output}"
+        "cp resources/seeds.txt {output}"

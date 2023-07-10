@@ -1,0 +1,31 @@
+configfile: "config/config.yaml"
+
+rule nextalign:
+    input:
+        expand(
+            "results/{indir}/s{{key}}/{infile}",
+            indir=config["input_namespace"],
+            infile=config["params"]["subsample_prealign_fasta"],
+        ),
+    output:
+        expand(
+            "results/{outdir}/s{{key}}/nextalign.aligned.fasta",
+            outdir=config["output_namespace"],
+        ),
+    params:
+        reference=config["params"]["reference"],
+        genemap=config["params"]["genemap"],
+        genes=config["params"]["genes"],
+        outdir=config["output_namespace"],
+        subsample_prealign_fasta=config["params"]["subsample_prealign_fasta"],
+    conda:
+        "envs/conda.yaml"
+    shell:
+        """
+        nextalign run \
+            --input-ref={params.reference} \
+            --genemap={params.genemap} \
+            --genes={params.genes} \
+            --output-all={params.outdir} \
+            {params.subsample_prealign_fasta}
+        """

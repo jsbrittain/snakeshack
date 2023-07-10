@@ -1,0 +1,106 @@
+[
+    {
+        "id": "idcode",
+        "name": "(vocpl) Provide Seeds_1",
+        "type": "source",
+        "config": {
+            "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/sources/provide_seeds/workflow/Snakefile",
+            "config": {
+                "output_namespace": "out"
+            }
+        }
+    },
+    {
+        "id": "idcode",
+        "name": "(vocpl) Nextalign_4",
+        "type": "module",
+        "config": {
+            "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/modules/nextalign/workflow/Snakefile",
+            "config": {
+                "input_namespace": "in",
+                "output_namespace": "out",
+                "params": {
+                    "reference": "resources/reference.fasta",
+                    "genemap": "resources/genemap.gff",
+                    "genes": "E,M,N,ORF1a,ORF1b,ORF3a,ORF6,ORF7a,ORF7b,ORF8,ORF9b,S",
+                    "subsample_prealign_fasta": "subsample_aln.fasta"
+                }
+            }
+        }
+    },
+    {
+        "id": "idcode",
+        "name": "(vocpl) Subsample Alignment_3",
+        "type": "module",
+        "config": {
+            "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/modules/subsample_alignment/workflow/Snakefile",
+            "config": {
+                "input_namespace": "in",
+                "output_namespace": "out",
+                "master_fasta": "results/in/beta.fasta",
+                "test": {
+                    "seeds_file": "seeds.txt"
+                }
+            }
+        }
+    },
+    {
+        "id": "idcode",
+        "name": "(vocpl) Subsample Ids Metadata_4",
+        "type": "module",
+        "config": {
+            "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/modules/subsample_ids_metadata/workflow/Snakefile",
+            "config": {
+                "input_namespace": "in",
+                "output_namespace": "out",
+                "seeds_file": "seeds.txt",
+                "master_fasta": "resources/ex_input/beta.fasta",
+                "params": {
+                    "master_metadata": "resources/ex_input/beta.metadata.tsv",
+                    "genome_matrix": "resources/ex_input/subsampling/matrix_genomes_unit_corrected.tsv",
+                    "keep_file": "resources/ex_input/subsampling/keep.txt",
+                    "remove_file": "resources/ex_input/subsampling/remove.txt",
+                    "filter_file": "resources/ex_input/subsampling/filters.tsv",
+                    "id_column": "gisaid_epi_isl",
+                    "geo_column": "country_exposure",
+                    "date_column": "date",
+                    "refgenome_size": 1,
+                    "max_missing": 99,
+                    "start_date": "2020-09-01",
+                    "end_date": "2021-09-01",
+                    "unit": "week"
+                }
+            }
+        }
+    },
+    {
+        "name": "Join [(vocpl) Nextalign_4]",
+        "type": "connector",
+        "config": {
+            "map": [
+                "(vocpl) Subsample Alignment_3",
+                "(vocpl) Nextalign_4"
+            ]
+        }
+    },
+    {
+        "name": "Join [(vocpl) Subsample Alignment_3]",
+        "type": "connector",
+        "config": {
+            "map": [
+                "(vocpl) Subsample Ids Metadata_4",
+                "(vocpl) Subsample Alignment_3"
+            ]
+        }
+    },
+    {
+        "name": "Join [(vocpl) Subsample Ids Metadata_4]",
+        "type": "connector",
+        "config": {
+            "map": [
+                "(vocpl) Provide Seeds_1",
+                "(vocpl) Subsample Ids Metadata_4"
+            ]
+        }
+    }
+]

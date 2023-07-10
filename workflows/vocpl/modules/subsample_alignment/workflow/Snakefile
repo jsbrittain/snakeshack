@@ -1,21 +1,59 @@
 configfile: "config/config.yaml"
 
+indir = config["input_namespace"]
+outdir = config["output_namespace"]
+
 rule subsample_alignment:
     input:
         expand(
             "results/{indir}/s{{key}}/output_sequence_ids.txt",
-            indir=config["input_namespace"],
+            indir=indir,
+        ),
+        expand(
+            "results/{outdir}/s{{key}}/subsample_ids.tsv",
+            indir=indir, outdir=outdir,
         )
     output:
         expand(
             "results/{outdir}/s{{key}}/subsample_aln.fasta",
-            outdir=config["output_namespace"],
+            outdir=outdir,
         )
     params:
-        master_fasta=config["master_fasta"]
+        master_fasta=config["params"]["master_fasta"]
     conda:
         "envs/conda.yaml"
     shell:
         """
         seqkit grep -n -f {input} {params.master_fasta} > {output}
+        """
+
+rule random_subsample_ids_metadata:
+    input:
+        expand(
+            "results/{indir}/s{{key}}/output_sequence_ids.txt",
+            indir=indir,
+        ),
+        expand(
+            "{master_metadata}",
+            master_metadata=config["params"]["master_metadata"],
+        )
+    output:
+        subsample_ids = expand(
+            "results/{outdir}/s{{key}}/subsample_ids.tsv",
+            outdir=config["output_namespace"]
+        ),
+        subsample_metadata = expand(
+            "results/{outdir}/s{{key}}/subsample_metadata.tsv",
+            outdir=config["output_namespace"]
+        )
+    params:
+        n_random=config["params"]["n_random"],
+        master_metadata=config["params"]["master_metadata"],
+    conda:
+        "envs/conda.yaml"
+    shell:
+        """
+        head -n1 {params.master_metadata} > {output.subsample_metadata}
+        shuf -n {params.n_random} {params.master_metadata} >> {output.subsample_metadata}
+        tail -n +2 {output.subsample_metadata} | cut -f1 > {output}
         """
