@@ -4,7 +4,14 @@
         "name": "(vocpl) Provide Seeds_1",
         "type": "source",
         "config": {
-            "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/sources/provide_seeds/workflow/Snakefile",
+            "snakefile": {
+                "function": "github",
+                "args": ["jsbrittain/snakeshack"],
+                "kwargs": {
+                    "path": "workflows/vocpl/sources/provide_seeds/workflow/Snakefile",
+                    "branch": "main"
+                }
+            },
             "config": {
                 "output_namespace": "out"
             }

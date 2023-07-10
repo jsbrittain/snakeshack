@@ -4,7 +4,7 @@ from snakemake.remote import AUTO
 
 rule provide_seeds:
     input:
-        srcdir("../resources/seeds.txt")
+        AUTO.remote(srcdir("../resources/seeds.txt"))
     output:
         expand(
             "results/{outdir}/seeds.txt",

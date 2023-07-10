@@ -116,18 +116,8 @@
         "type": "connector",
         "config": {
             "map": [
-                "(vocpl) Subsample Ids Metadata_4",
-                "(vocpl) Subsample Alignment_3"
-            ]
-        }
-    },
-    {
-        "name": "Join [(vocpl) Subsample Ids Metadata_4]",
-        "type": "connector",
-        "config": {
-            "map": [
                 "(vocpl) Provide Seeds_1",
-                "(vocpl) Subsample Ids Metadata_4"
+                "(vocpl) Subsample Alignment_3"
             ]
         }
     }

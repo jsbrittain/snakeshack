@@ -6,7 +6,6 @@ python -c "import builder; builder.BuildFromFile('workflow_local.json');"
 rm build.zip
 
 mkdir build/resources
-cp sources/provide_seeds/resources/seeds.txt build/resources/
 
 pushd build
 
@@ -25,6 +24,7 @@ rule target:
 
 # Resources and scripts are inaccessible
 mkdir resources
+# cp ../sources/provide_seeds/resources/seeds.txt resources/seeds.txt
 ln -s ~/Desktop/ex_input resources
 ln -s ex_input/beta.metadata.tsv resources/beta.metadata.tsv
 ln -s ex_input/beta.fasta resources/beta.fasta
