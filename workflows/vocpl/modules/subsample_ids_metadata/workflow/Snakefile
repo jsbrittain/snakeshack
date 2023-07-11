@@ -41,7 +41,6 @@ rule subsample_ids_metadata:
         "envs/conda.yaml"
     shell:
         """
-        python3.10 -m pip install Bio epiweeks pycountry_convert
         python3.10 scripts/subsampler_timeseries.py \
             --metadata {params.master_metadata} \
             --genome-matrix {params.genome_matrix} \

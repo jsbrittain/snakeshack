@@ -3,3 +3,7 @@ channels:
   - bioconda
 dependencies:
   - python==3.10
+  - pip:
+    - Bio
+    - epiweeks
+    - pycountry_convert
