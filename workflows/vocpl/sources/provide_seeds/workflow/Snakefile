@@ -1,10 +1,8 @@
 configfile: "config/config.yaml"
 
-from snakemake.remote import AUTO
-
 rule provide_seeds:
     input:
-        AUTO.remote(srcdir("../resources/seeds.txt"))
+        srcdir("../resources/seeds.txt")
     output:
         expand(
             "results/{outdir}/seeds.txt",

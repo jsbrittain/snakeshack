@@ -1,0 +1,16 @@
+input_namespace: "in"
+output_namespace: "out"
+params:
+  method: "iqtree"
+  outgroup_fasta: ""
+  fasttree:
+    gtr: true
+    boot: 0
+    flags: ""
+  iqtree:
+    nt: "AUTO"
+    m: "gtr"
+    ninit: 100
+    me: 0.01
+    b: 0
+    flags: ""

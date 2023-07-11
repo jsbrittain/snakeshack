@@ -2,12 +2,53 @@ configfile: "config/config.yaml"
 
 from pathlib import Path
 
-rule nextalign:
+indir = config["input_namespace"]
+outdir = config["output_namespace"]
+
+checkpoint get_seeds:
     input:
         expand(
+            "results/{indir}/seeds.txt",
+            indir=indir,
+        )
+    output:
+        expand(
+            "results/{outdir}/seeds.txt",
+            outdir=outdir,
+        )
+    shell:
+        """
+        cp {input} {output}
+        """
+
+def read_seeds_file(wildcards):
+    with open(checkpoints.get_seeds.get().output[0], "r") as file:
+        seeds = file.read().splitlines()
+        return expand(
+            "results/{outdir}/s{key}/nextalign.aligned.fasta",
+            outdir=outdir,
+            key=seeds,
+        )
+
+rule target:
+    input:
+        read_seeds_file
+#    default_target: True
+
+rule nextalign:
+    input:
+        prealign_fasta = expand(
             "results/{indir}/s{{key}}/{infile}",
             indir=config["input_namespace"],
             infile=config["params"]["subsample_prealign_fasta"],
+        ),
+        reference = expand(
+            srcdir("../{ref}"),
+            ref=config["params"]["reference"],
+        ),
+        genemap = expand(
+            srcdir("../{genemap}"),
+            genemap=config["params"]["genemap"],
         ),
     output:
         expand(
@@ -15,8 +56,6 @@ rule nextalign:
             outdir=config["output_namespace"],
         ),
     params:
-        reference=config["params"]["reference"],
-        genemap=config["params"]["genemap"],
         genes=config["params"]["genes"],
         outdir = lambda wildcards, output: Path(output[0]).parent
     conda:
@@ -24,9 +63,9 @@ rule nextalign:
     shell:
         """
         nextalign run \
-            --input-ref={params.reference} \
-            --genemap={params.genemap} \
+            --input-ref={input.reference} \
+            --genemap={input.genemap} \
             --genes={params.genes} \
             --output-all={params.outdir} \
-            {input}
+            {input.prealign_fasta}
         """

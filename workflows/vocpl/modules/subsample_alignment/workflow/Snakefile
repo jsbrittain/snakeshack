@@ -3,29 +3,59 @@ configfile: "config/config.yaml"
 indir = config["input_namespace"]
 outdir = config["output_namespace"]
 
+checkpoint get_seeds:
+    input:
+        expand(
+            "results/{indir}/seeds.txt",
+            indir=indir,
+        )
+    output:
+        expand(
+            "results/{outdir}/seeds.txt",
+            outdir=outdir,
+        )
+    shell:
+        """
+        cp {input} {output}
+        """
+
+def read_seeds_file(wildcards):
+    with open(checkpoints.get_seeds.get().output[0], "r") as file:
+        seeds = file.read().splitlines()
+        return expand(
+            "results/{outdir}/s{key}/subsample_aln.fasta",
+            outdir=outdir,
+            key=seeds,
+        )
+
+rule target:
+    input:
+        read_seeds_file
+#    default_target: True
+
 rule random_subsample_ids_metadata:
     input:
         master_metadata = expand(
-            "{master_metadata}",
+            srcdir("../{master_metadata}"),
             master_metadata=config["params"]["master_metadata"],
-        )
+        ),
     output:
         subsample_ids = expand(
             "results/{outdir}/s{{key}}/subsample_ids.tsv",
-            outdir=config["output_namespace"]
+            outdir=outdir,
         ),
         subsample_metadata = expand(
             "results/{outdir}/s{{key}}/subsample_metadata.tsv",
-            outdir=config["output_namespace"]
-        )
+            outdir=outdir,
+        ),
     params:
         n_random=config["params"]["n_random"],
     conda:
         "envs/conda.yaml"
     shell:
         """
-        head -n1 {input.master_metadata} > {output.subsample_metadata} &&
-        shuf -n {params.n_random} {input.master_metadata} >> {output.subsample_metadata} &&
+        head -n1 {input.master_metadata} > {output.subsample_metadata}
+        shuf -n {params.n_random} {input.master_metadata} >> {output.subsample_metadata}
         tail -n +2 {output.subsample_metadata} | cut -f1 > {output.subsample_ids}
         """
 
@@ -33,18 +63,20 @@ rule subsample_alignment:
     input:
         subsample_ids = expand(
             "results/{outdir}/s{{key}}/subsample_ids.tsv",
-            indir=indir, outdir=outdir,
-        )
+            outdir=outdir,
+        ),
+        master_fasta = expand(
+            srcdir("../{master_fasta}"),
+            master_fasta=config["params"]["master_fasta"],
+        ),
     output:
         expand(
             "results/{outdir}/s{{key}}/subsample_aln.fasta",
             outdir=outdir,
-        )
-    params:
-        master_fasta=config["params"]["master_fasta"]
+        ),
     conda:
         "envs/conda.yaml"
     shell:
         """
-        seqkit grep -n -f {input.subsample_ids} {params.master_fasta} > {output}
+        seqkit grep -n -f {input.subsample_ids} {input.master_fasta} > {output}
         """

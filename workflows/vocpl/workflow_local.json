@@ -1,17 +1,10 @@
 [
     {
         "id": "idcode",
-        "name": "(vocpl) Provide Seeds_1",
+        "name": "(vocpl) Provide Seeds",
         "type": "source",
         "config": {
-            "snakefile": {
-                "function": "github",
-                "args": ["jsbrittain/snakeshack"],
-                "kwargs": {
-                    "path": "workflows/vocpl/sources/provide_seeds/workflow/Snakefile",
-                    "branch": "main"
-                }
-            },
+            "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/sources/provide_seeds/workflow/Snakefile",
             "config": {
                 "output_namespace": "out"
             }
@@ -19,7 +12,7 @@
     },
     {
         "id": "idcode",
-        "name": "(vocpl) Nextalign_4",
+        "name": "(vocpl) Nextalign",
         "type": "module",
         "config": {
             "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/modules/nextalign/workflow/Snakefile",
@@ -37,7 +30,7 @@
     },
     {
         "id": "idcode",
-        "name": "(vocpl) Subsample Alignment_3",
+        "name": "(vocpl) Subsample Alignment",
         "type": "module",
         "config": {
             "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/modules/subsample_alignment/workflow/Snakefile",
@@ -54,22 +47,61 @@
         }
     },
     {
-        "name": "Join [(vocpl) Nextalign_4]",
+        "id": "idcode",
+        "name": "(vocpl) ML Tree",
+        "type": "module",
+        "config": {
+            "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/modules/ml_tree/workflow/Snakefile",
+            "config": {
+                "input_namespace": "in",
+                "output_namespace": "out",
+                "params": {
+                    "method": "iqtree",
+                    "outgroup_fasta": "",
+                    "fasttree": {
+                        "gtr": true,
+                        "boot": 0,
+                        "flags": ""
+                    },
+                    "iqtree": {
+                        "nt": "AUTO",
+                        "m": "gtr",
+                        "ninit": 100,
+                        "me": 0.01,
+                        "b": 0,
+                        "flags": ""
+                    }
+                }
+            }
+        }
+    },
+    {
+        "name": "Join [(vocpl) ML Tree]",
         "type": "connector",
         "config": {
             "map": [
-                "(vocpl) Subsample Alignment_3",
-                "(vocpl) Nextalign_4"
+                "(vocpl) Nextalign",
+                "(vocpl) ML Tree"
             ]
         }
     },
     {
-        "name": "Join [(vocpl) Subsample Alignment_3]",
+        "name": "Join [(vocpl) Nextalign]",
         "type": "connector",
         "config": {
             "map": [
-                "(vocpl) Provide Seeds_1",
-                "(vocpl) Subsample Alignment_3"
+                "(vocpl) Subsample Alignment",
+                "(vocpl) Nextalign"
+            ]
+        }
+    },
+    {
+        "name": "Join [(vocpl) Subsample Alignment]",
+        "type": "connector",
+        "config": {
+            "map": [
+                "(vocpl) Provide Seeds",
+                "(vocpl) Subsample Alignment"
             ]
         }
     }

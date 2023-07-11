@@ -1,0 +1,119 @@
+configfile: "config/config.yaml"
+
+import os
+
+indir = config["input_namespace"]
+outdir = config["output_namespace"]
+
+checkpoint get_seeds:
+    input:
+        expand(
+            "results/{indir}/seeds.txt",
+            indir=indir,
+        )
+    output:
+        expand(
+            "results/{outdir}/seeds.txt",
+            outdir=outdir,
+        )
+    shell:
+        """
+        cp {input} {output}
+        """
+
+def read_seeds_file(wildcards):
+    with open(checkpoints.get_seeds.get().output[0], "r") as file:
+        seeds = file.read().splitlines()
+        return expand(
+            "results/{outdir}/s{key}/ml_tree.treefile",
+            outdir=outdir,
+            key=seeds,
+        )
+
+rule target:
+    input:
+        read_seeds_file
+
+rule add_outgroup:
+    input:
+        msa_fasta = expand(
+            "results/{indir}/s{{key}}/nextalign.aligned.fasta",
+            indir=indir,
+        ),
+    output:
+        expand(
+            "results/{outdir}/s{{key}}/aligned.outgroup_added.fasta",
+            outdir=outdir,
+        )
+    params:
+        outgroup_fasta = config["params"]["outgroup_fasta"]
+    shell:
+        """
+        cat {params.outgroup_fasta} {input.msa_fasta} > {output}
+        """
+
+rule fasttree:
+    input:
+        msa_fasta = expand(
+            "results/{outdir}/s{{key}}/aligned.outgroup_added.fasta",
+            outdir=outdir,
+        ),
+    output:
+        expand(
+            "results/{outdir}/s{{key}}/ml_tree.treefile",
+            outdir=outdir,
+        )
+    params:
+        gtr = config["params"]["fasttree"]["gtr"],
+        boot = config["params"]["fasttree"]["boot"],
+        flags = config["params"]["fasttree"]["flags"],
+    conda:
+        "envs/fasttree.yaml"
+    shell:
+        """
+        FastTree -nt \
+            $(if [ {params.gtr} == true ]; then echo "-gtr"; else echo ""; fi) \
+            -boot {params.boot} \
+            {params.flags} \
+            {input.msa_fasta} > {output}
+        """
+
+rule iqtree2:
+    input:
+        msa_fasta = expand(
+            "results/{outdir}/s{{key}}/aligned.outgroup_added.fasta",
+            outdir=outdir,
+        ),
+    output:
+        expand(
+            "results/{outdir}/s{{key}}/ml_tree.treefile",
+            outdir=outdir,
+        )
+    params:
+        nt = config["params"]["iqtree"]["nt"],
+        m = config["params"]["iqtree"]["m"],
+        ninit = config["params"]["iqtree"]["ninit"],
+        me = config["params"]["iqtree"]["me"],
+        b = config["params"]["iqtree"]["b"],
+        outdir = outdir,
+        key = lambda wc: wc.key,
+    conda:
+        "envs/iqtree2.yaml"
+    shell:
+        """
+        iqtree2 -s {input.msa_fasta} \
+            -nt {params.nt} \
+            -m {params.m} \
+            -ninit {params.ninit} \
+            -me {params.me} \
+            $(if [ {params.b} -gt 0 ]; then echo "-b {params.b}"; else echo ""; fi) \
+            --prefix ml_tree
+        mv ml_tree.* results/{params.outdir}/s{params.key}
+        """
+
+# Rule selection - both rules take the same inputs and produce the same outputs,
+# but through different methods. Prioritize the one specified in the config.
+if config["params"]["method"].casefold() == "fasttree":
+    ruleorder: fasttree > iqtree2
+else:
+    ruleorder: iqtree2 > fasttree
