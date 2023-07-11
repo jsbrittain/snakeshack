@@ -149,5 +149,5 @@ rule treetime_iter:
             curr_tree="{params.outdir}/ml_treetime.iter$i.nwk"
         done
 
-        $(if [ $i -gt 0 ]; then mv "ml_treetime.iter$i.nwk" {output.ml_treetime_final}; else mv {input.ml_treetime_iter0} {output.ml_treetime_final}; fi)
+        $(if [ $i -gt 0 ]; then mv "{params.outdir}/ml_treetime.iter$i.nwk" {output.ml_treetime_final}; else mv {input.ml_treetime_iter0} {output.ml_treetime_final}; fi)
         """

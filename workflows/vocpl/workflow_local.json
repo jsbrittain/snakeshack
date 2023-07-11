@@ -76,6 +76,42 @@
         }
     },
     {
+        "id": "idcode",
+        "name": "(vocpl) TreeTime",
+        "type": "module",
+        "config": {
+            "snakefile": "/Users/jsb/repos/jsbrittain/snakeshack/workflows/vocpl/modules/treetime/workflow/Snakefile",
+            "config": {
+                "input_namespace": "in",
+                "output_namespace": "out",
+                "params": {
+                    "master_metadata": "resources/beta.metadata.tsv",
+                    "treetime": {
+                        "init": {
+                            "clock_rate": 0.0008,
+                            "clock_std_dev": 0.00002,
+                            "reroot": "oldest"
+                        },
+                        "iter": {
+                            "max_iter": 10,
+                            "max_outliers": 100
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "name": "Join [(vocpl) TreeTime]",
+        "type": "connector",
+        "config": {
+            "map": [
+                "(vocpl) ML Tree",
+                "(vocpl) TreeTime"
+            ]
+        }
+    },
+    {
         "name": "Join [(vocpl) ML Tree]",
         "type": "connector",
         "config": {
