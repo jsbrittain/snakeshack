@@ -2,14 +2,13 @@ configfile: "config/config.yaml"
 
 import os
 
-indir = config["input_namespace"]
 outdir = config["output_namespace"]
 
 checkpoint get_seeds:
     input:
         expand(
             "results/{indir}/seeds.txt",
-            indir=indir,
+            indir=config["input_namespace"]["seeds"],
         )
     output:
         expand(
@@ -38,7 +37,7 @@ rule add_outgroup:
     input:
         msa_fasta = expand(
             "results/{indir}/s{{key}}/nextalign.aligned.fasta",
-            indir=indir,
+            indir=config["input_namespace"]["fasta"],
         ),
     output:
         expand(

@@ -1,4 +1,6 @@
-input_namespace: "in"
+input_namespace:
+  ml_tree: "ml_tree"
+  seeds: "seeds"
 output_namespace: "out"
 params:
   master_metadata: "resources/beta.metadata.tsv"

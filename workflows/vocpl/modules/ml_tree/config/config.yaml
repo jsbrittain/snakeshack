@@ -1,4 +1,6 @@
-input_namespace: "in"
+input_namespace:
+  seeds: "seeds"
+  fasta: "fasta"
 output_namespace: "out"
 params:
   method: "iqtree"

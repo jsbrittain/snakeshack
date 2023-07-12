@@ -17,7 +17,7 @@ snakemake --list
 snakemake -np
 
 ### ISSUE - TODO - Specified default target ###
-snakemake --cores 4 --use-conda vocpl_treetime_target
+# snakemake --cores 4 --use-conda vocpl_dta_target
 
 popd
 deactivate

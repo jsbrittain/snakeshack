@@ -1,13 +1,13 @@
 configfile: "config/config.yaml"
 
-indir = config["input_namespace"]
+indir = config["input_namespace"]["ml_tree"]
 outdir = config["output_namespace"]
 
 checkpoint get_seeds:
     input:
         expand(
             "results/{indir}/seeds.txt",
-            indir=indir,
+            indir=config["input_namespace"]["seeds"],
         )
     output:
         expand(
