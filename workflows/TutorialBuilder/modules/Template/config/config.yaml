@@ -1,0 +1,5 @@
+input_namespace: in
+output_namespace: out
+params:
+  infile: infile.txt
+  outfile: outfile.txt

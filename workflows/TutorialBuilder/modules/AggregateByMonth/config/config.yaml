@@ -1,0 +1,10 @@
+input_namespace: in
+output_namespace: out
+params:
+  Source: "data.csv"
+  DateColumn: "Date_reported"
+  Columns:
+    - New_cases
+    - Cumulative_cases
+    - New_deaths
+    - Cumulative_deaths

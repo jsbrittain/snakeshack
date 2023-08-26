@@ -1,0 +1,35 @@
+configfile: "config/config.yaml"
+from snakemake.remote import AUTO
+import json
+
+indir = config["input_namespace"]
+outdir = config["output_namespace"]
+params = config["params"]
+
+rule target:
+    input:
+        source=expand(
+            "results/{indir}/{filename}",
+            indir=indir,
+            filename=params["Source"],
+        ),
+        script=AUTO.remote(srcdir("../resources/scripts/plotcol.py")),
+    output:
+        temp(touch(expand(
+            "results/{outdir}/mark",
+            outdir=outdir
+        ))),
+    log:
+        "logs/test.log"
+    params:
+        col_x=params["Column_X"],
+        col_y=params["Column_Y"],
+    conda:
+        "envs/conda.yaml"
+    shell:
+        """
+        python {input.script} \
+            --source="{input.source}" \
+            --col_x="{params.col_x}" \
+            --col_y="{params.col_y}" \
+        """

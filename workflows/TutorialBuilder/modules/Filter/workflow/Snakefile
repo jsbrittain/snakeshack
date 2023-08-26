@@ -1,0 +1,35 @@
+configfile: "config/config.yaml"
+from snakemake.remote import AUTO
+import json
+
+indir = config["input_namespace"]
+outdir = config["output_namespace"]
+params = config["params"]
+
+rule target:
+    input:
+        source=expand(
+            "results/{indir}/{filename}",
+            indir=indir,
+            filename=params["Source"],
+        ),
+        script=AUTO.remote(srcdir("../resources/scripts/filter.py")),
+    output:
+        expand(
+            "results/{outdir}/{filename}",
+            outdir=outdir,
+            filename=params["Source"],
+        ),
+    log:
+        "logs/test.log"
+    params:
+        filters=json.dumps(params["Filters"]).replace("\"", "\'"),
+    conda:
+        "envs/conda.yaml"
+    shell:
+        """
+        python {input.script} \
+            --source="{input.source}" \
+            --dest="{output}" \
+            --filters="{params.filters}" \
+        """

@@ -1,0 +1,5 @@
+input_namespace: null
+output_namespace: out
+params:
+  url: "https://snakemake.github.io/img/jk/logo.png"
+  filename: "snakemake.png"

@@ -1,0 +1,26 @@
+configfile: "config/config.yaml"
+
+import shutil
+from snakemake.remote import AUTO
+
+indir=config["input_namespace"]
+outdir=config["output_namespace"]
+params=config["params"]
+
+rule target:
+    input:
+        url=AUTO.remote(params["url"])
+    output:
+        expand(
+            "results/{outdir}/{filename}",
+            outdir=outdir,
+            filename=params["filename"]
+        )
+    log:
+        f"benchmark/{outdir}.txt"
+    benchmark:
+        f"benchmark/{outdir}"
+    shell:
+        """
+        mv {input} {output}
+        """

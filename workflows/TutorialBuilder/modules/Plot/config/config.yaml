@@ -1,0 +1,6 @@
+input_namespace: in
+output_namespace: out
+params:
+  Source: "data.csv"
+  Column_X: "Date_reported"
+  Column_Y: "New_cases"
