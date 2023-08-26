@@ -1,0 +1,31 @@
+configfile: "config/config.yaml"
+
+import shutil
+from snakemake.remote import AUTO
+
+indir=config["input_namespace"]
+outdir=config["output_namespace"]
+params=config["params"]
+
+rule target:
+    input:
+        url=AUTO.remote(params["url"]),
+        script=AUTO.remote(srcdir("../resources/scripts/move_file.py")),
+    output:
+        expand(
+            "results/{outdir}/{filename}",
+            outdir=outdir,
+            filename=params["filename"]
+        )
+    log:
+        f"benchmark/{outdir}.txt"
+    benchmark:
+        f"benchmark/{outdir}"
+    conda:
+        "envs/conda.yaml"
+    script:
+        """
+        {input.script} \
+            --source="{input.url}" \
+            --dest="{output}"
+        """
