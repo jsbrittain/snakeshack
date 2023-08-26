@@ -9,7 +9,8 @@ params=config["params"]
 
 rule target:
     input:
-        url=AUTO.remote(params["url"])
+        url=AUTO.remote(params["url"]),
+        script=AUTO.remote(srcdir("../resources/scripts/move_file.py")),
     output:
         expand(
             "results/{outdir}/{filename}",
@@ -20,5 +21,11 @@ rule target:
         f"benchmark/{outdir}.txt"
     benchmark:
         f"benchmark/{outdir}"
-    run:
-        shutil.move(input.url[0], output[0])
+    conda:
+        "envs/conda.yaml"
+    shell:
+        """
+        python {input.script} \
+            --source="{input.url}" \
+            --dest="{output}"
+        """
