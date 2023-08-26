@@ -1,6 +1,5 @@
 configfile: "config/config.yaml"
 
-import shutil
 from snakemake.remote import AUTO
 
 indir=config["input_namespace"]
