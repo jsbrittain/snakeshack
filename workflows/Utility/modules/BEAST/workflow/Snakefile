@@ -1,3 +1,11 @@
+"""
+Runs or resumes a BEAST [https://beast.community/] analysis
+
+Params:
+    xml_file (string): Input XML file
+    save_every (number): Iterations between checkpoint saves, default 1000
+    options (string): Additional command line options
+"""
 configfile: "config/config.yaml"
 
 indir = config["input_namespace"]
