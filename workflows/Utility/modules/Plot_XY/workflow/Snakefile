@@ -1,0 +1,33 @@
+configfile: "config/config.yaml"
+import json
+
+outdir = config["output_namespace"]
+params = config["params"]
+
+rule target:
+    input:
+        script=srcdir("../resources/scripts/test.py")
+    output:
+        temp(touch(expand(
+            "results/{outdir}/mark",
+            outdir=outdir
+        ))),
+    log:
+        "logs/test.log"
+    params:
+        source=params["Source"],
+        col_x=params["Column_X"],
+        col_y=params["Column_Y"],
+        filters=json.dumps(params["Filters"]).replace("\"", "\'"),
+        convert_x_to_datetime=params["Convert_X_To_DateTime"],
+    conda:
+        "envs/conda.yaml"
+    shell:
+        """
+        python {input.script} \
+            --source="{params.source}" \
+            --col_x="{params.col_x}" \
+            --col_y="{params.col_y}" \
+            --filters="{params.filters}" \
+            --convert_x_to_datetime="{params.convert_x_to_datetime}"
+        """

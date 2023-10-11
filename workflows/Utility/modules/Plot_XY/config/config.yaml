@@ -1,0 +1,9 @@
+input_namespace: in
+output_namespace: out
+params:
+  Source: "https://covid19.who.int/WHO-COVID-19-global-data.csv"
+  Column_X: "Date_reported"
+  Convert_X_To_DateTime: true
+  Column_Y: "New_cases"
+  Filters:
+    Country_code: "ZA"

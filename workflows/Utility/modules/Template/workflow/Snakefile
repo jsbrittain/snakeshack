@@ -1,0 +1,22 @@
+configfile: "config/config.yaml"
+
+indir=config["input_namespace"]
+outdir=config["output_namespace"]
+params=config["params"]
+
+rule target:
+    input:
+        infile = f"results/{indir}/infile.txt",
+        script = srcdir(f"../resources/scripts/test.sh"),
+    output:
+        f"results/{outdir}/outfile.txt",
+    log:
+        f"benchmark/{outdir}.txt"
+    benchmark:
+        f"benchmark/{outdir}"
+    conda:
+        "envs/conda.yaml"
+    shell:
+        """
+        {input.script} {input.infile} {output}
+        """

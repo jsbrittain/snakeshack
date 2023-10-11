@@ -1,0 +1,6 @@
+input_namespace: "in"
+output_namespace: "out"
+params:
+  xml_file: "input.xml"
+  save_every: 1000
+  options: ""
