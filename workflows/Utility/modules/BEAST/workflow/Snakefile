@@ -41,6 +41,10 @@ rule resume_beast:
         checkpoint=checkpoint_file,
         save_every=params["save_every"],
         opts=params["options"],
+    log:
+        "log/resume_beast.log"
+    benchmark:
+        "benchmark/resume_beast.txt"
     conda:
         "envs/conda.yml"
     shell:
@@ -52,7 +56,8 @@ rule resume_beast:
             -load_state {params.checkpoint} \
             -force_resume \
             {params.opts} \
-            {input.xml}
+            {input.xml} \
+            > >(tee -a log/stdout.log) 2> >(tee -a log/stderr.log >&2) 
         touch {output}
         """
 
@@ -68,6 +73,10 @@ rule run_beast:
             "results/{outdir}/mark",
             outdir=config["output_namespace"],
         )
+    log:
+        "log/run_beast.log"
+    benchmark:
+        "benchmark/run_beast.txt"
     params:
         checkpoint=checkpoint_file,
         save_every=params["save_every"],
@@ -80,7 +89,8 @@ rule run_beast:
             -save_every {params.save_every} \
             -save_state {params.checkpoint} \
             {params.opts} \
-            {input.xml}
+            {input.xml} \
+            > >(tee -a log/stdout.log) 2> >(tee -a log/stderr.log >&2) 
         touch {output}
         """
 
