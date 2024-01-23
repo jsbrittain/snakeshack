@@ -1,0 +1,31 @@
+input_namespace: null
+output_namespace: single_modules_copy_run
+single_modules_copy_run:
+  name: (single_modules) copy_run
+  type: module
+  snakefile: /Users/jsb/repos/jsbrittain/GRAPEVNE/electron-app/postbuild_tests/test-repo/workflows/single_modules/modules/copy_run/workflow/Snakefile
+  parameter_map:
+  - from:
+    - config
+    - utility_touch
+    - config
+    - params
+    - filename
+    to:
+    - params
+    - filename
+  config:
+    input_namespace: utility_touch
+    output_namespace: single_modules_copy_run
+    params:
+      filename: data.csv
+utility_touch:
+  name: (Utility) touch
+  type: module
+  snakefile: /Users/jsb/repos/jsbrittain/snakeshack/workflows/Utility/modules/touch/workflow/Snakefile
+  parameter_map: null
+  config:
+    input_namespace: null
+    output_namespace: utility_touch
+    params:
+      filename: newfilename.txt

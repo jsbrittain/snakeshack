@@ -1,0 +1,17 @@
+configfile: "config/config.yaml"
+import configutil
+config = configutil.remap_params(config)
+
+module single_modules_copy_run:
+    snakefile:
+        config["single_modules_copy_run"]["snakefile"]
+    config:
+        config["single_modules_copy_run"]["config"]
+use rule * from single_modules_copy_run as single_modules_copy_run_*
+
+module utility_touch:
+    snakefile:
+        config["utility_touch"]["snakefile"]
+    config:
+        config["utility_touch"]["config"]
+use rule * from utility_touch as utility_touch_*
