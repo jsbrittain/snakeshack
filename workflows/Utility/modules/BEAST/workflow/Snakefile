@@ -1,5 +1,4 @@
-"""
-Runs or resumes a BEAST [https://beast.community/] analysis
+"""Runs or resumes a BEAST [https://beast.community/] analysis
 
 Params:
     xml_file (string): Input XML file
@@ -58,6 +57,12 @@ rule resume_beast:
             {params.opts} \
             {input.xml} \
             > >(tee -a log/stdout.log) 2> >(tee -a log/stderr.log >&2) 
+        
+        # Move residual BEAST log files
+        mkdir -p log
+        mv *.txt log
+        
+        # Signal completion
         touch {output}
         """
 
@@ -91,6 +96,12 @@ rule run_beast:
             {params.opts} \
             {input.xml} \
             > >(tee -a log/stdout.log) 2> >(tee -a log/stderr.log >&2) 
+
+        # Move residual BEAST log files
+        mkdir -p log
+        mv *.txt log
+
+        # Signal completion
         touch {output}
         """
 

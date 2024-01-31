@@ -1,5 +1,6 @@
 channels:
-  - bioconda
+  - bioconda/label/cf201901
 dependencies:
+  - java-jdk
   - beagle
   - beast
