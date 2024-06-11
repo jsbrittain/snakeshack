@@ -1,3 +1,16 @@
+"""BEASTgen
+
+A simple program for transforming data from one format to another [https://beast.community/beastgen]. For example, change a NEXUS file into a FASTA file.
+
+This module calls "beastgen [arguments] <template> <input> <output>" where arguments is a string of command line arguments. This can include the option ‘-D’ which allows the user to specify additional variables and their values that are specific to a BEASTGen operation (see https://beast.community/beastgen for more information). The template file is a BEASTGen template file that specifies how the input file should be transformed. The input file is the file to be transformed. The output file is the file that will be created by the transformation. Note that emplate and input files must be concrete (not symbolic links) for BEASTGen to work.
+
+Params:
+    Template filename (str): BEASTGen template file [concrete]
+    Input filename (str): Input file [concrete]
+    Output filename (str): Output file
+    Arguments (str): Command line arguments
+        See https://beast.community/beastgen for available options
+"""
 configfile: "config/config.yaml"
 
 indir_template = config["input_namespace"]["template"]
