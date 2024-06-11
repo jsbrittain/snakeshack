@@ -1,0 +1,37 @@
+configfile: "config/config.yaml"
+
+indir_template = config["input_namespace"]["template"]
+indir_file = config["input_namespace"]["file"]
+outdir = config["output_namespace"]
+
+params = config["params"]
+template_file = params["Template filename"]
+in_file = params["Input filename"]
+out_file = params["Output filename"]
+arguments = params["Arguments"]
+
+rule beastgen:
+    input:
+        infile = f"results/{indir_file}/{in_file}",
+        template = f"results/{indir_template}/{template_file}",
+    output:
+        outfile = f"results/{outdir}/{out_file}",
+    params:
+        args = arguments,
+    log:
+        "logs/beastgen"
+    conda:
+        "envs/beastgen.yaml"
+    shell:
+        """
+        # Download BEASTGen if not already present
+        if [ ! -d resources ]; then
+            mkdir -p resources/beastgen
+            wget https://github.com/beast-dev/beast-mcmc/releases/download/v1.10.5pre_thorney_v0.1.2/BEASTGen_v0.3pre_thorney.tgz -O resources/beastgen.tgz
+            tar -xzf resources/beastgen.tgz -C resources/beastgen --strip-components 1
+            rm resources/beastgen.tgz
+        fi
+
+        # Run BEASTGen
+        resources/beastgen/bin/beastgen {params.args} {input.template} {input.infile} {output.outfile}
+        """

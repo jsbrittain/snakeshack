@@ -1,0 +1,9 @@
+input_namespace:
+  template: template
+  file: file
+output_namespace: out
+params:
+  "Template filename": to_fasta.template
+  "Input filename": dengue.nex
+  "Output filename": dengue.fasta
+  Arguments: ""
