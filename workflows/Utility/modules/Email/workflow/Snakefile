@@ -1,0 +1,126 @@
+"""Send email
+
+This module sends an email to a list of recipients once the input folder contains the file 'touch', which indicates that the previous steps have been completed. Credentials should be stored and provided in a separate (local) file and connected to this module. Credentials should be provided as a JSON file containing the keys 'username' and 'password' at the top level for SMTP server access, e.g. a file `credentials.json`:
+{
+    "username": "myusername",
+    "password": "mypassword"
+}
+
+It is recommended that you do not use your personal email account for this purpose. Consider creating a new email account. For Gmail, you will need to enable 2FA login and create an "app password". Use the app password in your credentials file.
+
+Params:
+    SMTP Server (str): The SMTP server to use.
+    SMTP Port (int): The port to use for the SMTP server.
+    Subject (str): The subject of the email.
+    Body (str): The body of the email.
+    Recipients (list[str]): A comma separated list of email addresses to send the email to.
+"""
+configfile: "config/config.yaml"
+import time
+import glob
+import json
+from pathlib import Path
+
+indirs = config["input_namespace"]
+outdir = config["output_namespace"]
+params = config["params"]
+
+allow_multiple_emails = params["Behaviour"]["Allow multiple emails"]
+delay_timer = params["Behaviour"]["Check triggers interval (secs)"]
+shutdown_on_send = params["Behaviour"]["Allow multiple emails"]
+timeout = params["Behaviour"]["Shutdown timeout"]
+t0 = time.time()
+
+credentials = Path('results') / indirs["credentials"] / params["Credentials"]["Filename"]
+send_trigger = Path('results') / indirs["send"] / params["Triggers"]["Send email"]
+shutdown_trigger = Path('results') / indirs["shutdown"] / params["Triggers"]["Shutdown"]
+
+def script(name=""):
+    """Return the path to a script (supports local and/or remote execution modes)"""
+    workflow_srcdir = srcdir('')
+    try:
+        import requests
+        from snakemake.remote import AUTO
+        remote_file = '/'.join([workflow_srcdir, "scripts", name])
+        s = AUTO.remote(remote_file)
+        r = requests.get(remote_file)
+        with open(s, 'w') as f:
+            f.write(r.text)
+    except TypeError:
+        s = Path(workflow_srcdir) / "scripts" / name
+    return s
+
+import importlib.util
+remote_file = script("sendmail.py")
+spec = importlib.util.spec_from_file_location("sendmail", remote_file)
+sendmail = importlib.util.module_from_spec(spec)
+sys.modules["sendmail"] = sendmail
+spec.loader.exec_module(sendmail)
+
+def timed_out():
+    if timeout > 0:
+        return time.time() - t0 > timeout
+    return False
+
+tries = 0
+def all_input(wc):
+    global tries
+
+    # Check for stopping conditions
+    if not Path(shutdown_trigger).exists() and not timed_out():
+        tries += 1
+        checkpoints.keep_trying.get(ref=tries)
+    else:
+        return shutdown_trigger
+
+rule all:
+    input:
+        # Check for stopping conditions (all email logic handled within checkpoint)
+        all_input,
+
+checkpoint keep_trying:
+    output:
+        f"results/{outdir}/check_{{ref}}",
+    run:
+        global progress_file
+
+        if Path(send_trigger).exists():
+            Path(send_trigger).unlink()
+            print(f"Sending email...")
+            email()
+        else:
+            time.sleep(delay_timer)
+        for file in glob.glob(f"results/{outdir}/check_*"):
+            Path(file).unlink()
+        progress_file = output[0]
+        Path(output[0]).touch()
+
+def email():
+    # Outputs
+    shutdown_marker = f"results/{outdir}/touch"
+    # Params
+    smtp_server = config["params"]["Server"]["SMTP Server"]
+    smtp_port = config["params"]["Server"]["SMTP Port"]
+    subject = config["params"]["Message"]["Subject"]
+    body = config["params"]["Message"]["Body"]
+    recipients = config["params"]["Message"]["Recipients"]
+    # Get credentials
+    with open(credentials) as f:
+        credentials_json = json.load(f)
+        username = credentials_json.get('username', "")
+        password = credentials_json.get('password', "")
+    sender = username
+    # Execute the custom module
+    args = (
+        smtp_server,
+        smtp_port,
+        subject,
+        body,
+        sender,
+        recipients,
+        username,
+        password, 
+    )
+    sendmail.send_email(*args)
+    # Shutdown marker
+    Path(shutdown_marker).touch()
