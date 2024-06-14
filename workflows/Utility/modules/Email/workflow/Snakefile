@@ -42,7 +42,7 @@ def script(name=""):
         import requests
         from snakemake.remote import AUTO
         remote_file = '/'.join([workflow_srcdir, "scripts", name])
-        s = AUTO.remote(remote_file)
+        s = AUTO.remote(remote_file)[0]
         r = requests.get(remote_file)
         with open(s, 'w') as f:
             f.write(r.text)
